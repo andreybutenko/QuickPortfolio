@@ -5,8 +5,8 @@ export function getDynamoDbClient(): AWS.DynamoDB {
   AWS.config.update({
     region: 'us-west-2',
     credentials: {
-      accessKeyId: process.env['AWS_ACCESS_KEY'] as string,
-      secretAccessKey: process.env['AWS_SECRET_ACCESS_KEY'] as string,
+      accessKeyId: process.env['QP_AWS_ACCESS_KEY'] as string,
+      secretAccessKey: process.env['QP_AWS_SECRET_ACCESS_KEY'] as string,
     },
   });
 

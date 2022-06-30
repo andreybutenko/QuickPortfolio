@@ -39,8 +39,8 @@ This project will work when using Node v16.13.0. This project has configurations
 Create an `.env.local` file in the root of this project with the following keys:
 
 ```
-AWS_ACCESS_KEY=
-AWS_SECRET_ACCESS_KEY=
+QP_AWS_ACCESS_KEY=
+QP_AWS_SECRET_ACCESS_KEY=
 ```
 
 ## Run Development Server
