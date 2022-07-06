@@ -12,5 +12,15 @@ export interface IPortfolio {
   /** User-provided content */
   content: {
     title: string;
+    name: string;
+    headshot: string;
+    about: string;
+    work: string[][];
+    techskills: string[];
+    softskills: string[];
+    //  [skills: string]: string[];
+    projects: string[][];
+    contact: string[];
+    message: string;
   };
 }
