@@ -1,6 +1,6 @@
 /** Portfolio data */
 export interface WorkHistory {
-  jobTitle: string;
+  position: string;
   company: string;
   dateWorked: string;
   description: string;
