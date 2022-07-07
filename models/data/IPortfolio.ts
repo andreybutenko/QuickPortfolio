@@ -1,35 +1,35 @@
 /** Portfolio data */
-export interface WorkHistory {
-  position: string;
-  company: string;
-  dateWorked: string;
-  description: string;
+export interface IWorkHistory {
+  position?: string;
+  company?: string;
+  dateWorked?: string;
+  description?: string;
 }
-export interface Projects {
-  title: string;
-  picture: string;
-  summary: string;
-  viewCode: string;
-  liveDemo: string;
-}
-
-export interface Skills {
-  tech: string[];
-  soft: string[];
+export interface IProjects {
+  title?: string;
+  picture?: string;
+  summary?: string;
+  viewCode?: string;
+  liveDemo?: string;
 }
 
-export interface Contact {
-  codeRepoLink: string;
-  linkedin: string;
-  email: string;
+export interface ISkills {
+  tech?: string[];
+  soft?: string[];
 }
 
-export interface Message {
-  firstName: string;
-  lastName: string;
-  senderEmail: string;
-  subject: string;
-  messages: string;
+export interface IContact {
+  codeRepoLink?: string;
+  linkedin?: string;
+  email?: string;
+}
+
+export interface IMessage {
+  firstName?: string;
+  lastName?: string;
+  senderEmail?: string;
+  subject?: string;
+  messages?: string;
 }
 export interface IPortfolio {
   /** Unique ID */
@@ -47,10 +47,10 @@ export interface IPortfolio {
     name: string;
     headshot: string;
     about: string;
-    work: WorkHistory[];
-    skills: Skills[];
-    projects: Projects[];
-    contact: Contact;
-    message: Message[];
+    work: IWorkHistory[];
+    skills: ISkills;
+    projects: IProjects[];
+    contact: IContact;
+    message: IMessage[];
   };
 }

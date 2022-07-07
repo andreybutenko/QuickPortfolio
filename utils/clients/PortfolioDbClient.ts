@@ -5,18 +5,12 @@ import {
 } from 'aws-sdk/clients/dynamodb';
 import { DynamoDbTable } from 'enums';
 import { IPortfolioClient } from 'models/clients';
-import {
-  IPortfolio,
-  WorkHistory,
-  Projects,
-  Skills,
-  Contact,
-  Message,
-} from 'models/data';
+import * as PortfolioDefinitions from 'models/data/IPortfolio';
 import { getDynamoDbClient } from 'utils/api';
 import { isUndefined } from 'utils';
-import { CardContent } from '@mui/material';
+import { CardContent, getSkeletonUtilityClass } from '@mui/material';
 import { workerData } from 'worker_threads';
+import { listConflictingAliasesMaxItemsInteger } from 'aws-sdk/clients/cloudfront';
 
 /** Client to interact with portfolio DynamoDB */
 export class PortfolioDbClient implements IPortfolioClient {
@@ -59,7 +53,7 @@ export class PortfolioDbClient implements IPortfolioClient {
   }
 
   /** Put portfolio */
-  async put(portfolio: IPortfolio) {
+  async put(portfolio: PortfolioDefinitions.IPortfolio) {
     await this.ddbClient
       .putItem({
         TableName: DynamoDbTable.PORTFOLIO_DEV,
@@ -72,23 +66,20 @@ export class PortfolioDbClient implements IPortfolioClient {
 }
 
 /** Unmarshal portfolios from DynamoDB */
-function unmarshalPortfolios(portfolios?: ItemList): IPortfolio[] {
+function unmarshalPortfolios(
+  portfolios?: ItemList
+): PortfolioDefinitions.IPortfolio[] {
   return (
     (portfolios?.map((portfolio) =>
       unmarshalPortfolio(portfolio)
-    ) as IPortfolio[]) || []
+    ) as PortfolioDefinitions.IPortfolio[]) || []
   );
 }
 
 /** Unmarshal portfolio from DynamoDB */
 function unmarshalPortfolio(
-  portfolio: AttributeMap,
-  work: WorkHistory,
-  projects: AttributeMap,
-  skills: AttributeMap,
-  contact: AttributeMap,
-  message: AttributeMap
-): IPortfolio | undefined {
+  portfolio: AttributeMap
+): PortfolioDefinitions.IPortfolio | undefined {
   if (isUndefined(portfolio)) {
     return;
   }
@@ -102,20 +93,44 @@ function unmarshalPortfolio(
     content: {
       title: portfolio?.content?.M?.title?.S as string,
       name: portfolio?.content?.M?.name?.S as string,
-      headshot: portfolio?.content?.M?.name?.S as string,
-      about: portfolio?.content?.M?.name?.S as string,
+      headshot: portfolio?.content?.M?.headshot?.S as string,
+      about: portfolio?.content?.M?.about?.S as string,
+      work: portfolio?.content?.M?.work?.L?.map((job) => ({
+        title: job.M?.title?.S,
+        picture: job.M?.picture?.S,
+        summary: job.M?.summary?.S,
+        viewCode: job.M?.viewCode?.S,
+        liveDemo: job.M?.liveDemo?.S,
+      })) as PortfolioDefinitions.IWorkHistory[],
+      projects: portfolio?.content?.M?.projects?.L?.map((project) => ({
+        title: project.M?.title?.S,
+        picture: project.M?.picture?.S,
+        summary: project.M?.summary?.S,
+        viewCode: project.M?.viewCode?.S,
+        liveDemo: project.M?.liveDemo?.S,
+      })) as PortfolioDefinitions.IProjects[],
+      skills: {
+        tech: portfolio?.content?.M?.skills.M?.tech as string[],
+        soft: portfolio?.content?.M?.skills.M?.soft as string[],
+      } as PortfolioDefinitions.ISkills,
+      contact: {
+        codeRepoLink: portfolio?.content?.M?.contact.M?.codeRepoLink as string,
+        linkedin: portfolio?.content?.M?.contact.M?.linkedin as string,
+        email: portfolio?.content?.M?.contact.M?.email as string,
+      } as PortfolioDefinitions.IContact,
+      message: portfolio?.content?.M?.message?.L?.map((msg) => ({
+        firstName: msg.M?.firstName?.S,
+        lastName: msg.M?.lastNmae?.S,
+        subject: msg.M?.subject?.S,
+        messages: msg.M?.messages?.S,
+      })) as PortfolioDefinitions.IMessage[],
     },
   };
 }
 
 /** Marshal portfolio for DynamoDB */
 function marshalPortfolio(
-  portfolio: IPortfolio,
-  work: WorkHistory,
-  projects: Projects,
-  skills: Skills,
-  contact: Contact,
-  message: Message
+  portfolio: PortfolioDefinitions.IPortfolio
 ): PutItemInputAttributeMap {
   return {
     id: { S: portfolio.id },
@@ -131,43 +146,50 @@ function marshalPortfolio(
         name: { S: portfolio.content.name },
         headshot: { S: portfolio.content.headshot },
         about: { S: portfolio.content.about },
+
         work: {
-          M: {
-            position: { S: work.position },
-            company: { S: work.company },
-            dateWorked: { S: work.dateWorked },
-            description: { S: work.description },
-          },
+          L: portfolio.content.work.map((job) => ({
+            M: {
+              position: { S: job.position },
+              company: { S: job.company },
+              dateWorked: { S: job.dateWorked },
+              description: { S: job.description },
+            },
+          })),
         },
         projects: {
-          M: {
-            title: { S: projects.title },
-            picture: { S: projects.picture },
-            summary: { S: projects.summary },
-            viewCode: { S: projects.viewCode },
-            liveDemo: { S: projects.liveDemo },
-          },
+          L: portfolio.content.projects.map((project) => ({
+            M: {
+              title: { S: project.title },
+              picture: { S: project.picture },
+              summary: { S: project.summary },
+              viewCode: { S: project.viewCode },
+              liveDemo: { S: project.liveDemo },
+            },
+          })),
         },
         skills: {
           M: {
-            tech: { SS: skills.tech },
-            soft: { SS: skills.soft },
+            tech: { SS: portfolio.content.skills.tech },
+            soft: { SS: portfolio.content.skills.soft },
           },
         },
         contact: {
           M: {
-            codeRepoLink: { S: contact.codeRepoLink },
-            linkedin: { S: contact.linkedin },
-            email: { S: contact.email },
+            codeRepoLink: { S: portfolio.content.contact.codeRepoLink },
+            linkedin: { S: portfolio.content.contact.linkedin },
+            email: { S: portfolio.content.contact.email },
           },
         },
         message: {
-          M: {
-            firstName: { S: message.firstName },
-            lastName: { S: message.lastName },
-            subject: { S: message.subject },
-            messages: { S: message.messages },
-          },
+          L: portfolio.content.message.map((msg) => ({
+            M: {
+              firstName: { S: msg.firstName },
+              lastName: { S: msg.lastName },
+              subject: { S: msg.subject },
+              messages: { S: msg.messages },
+            },
+          })),
         },
       },
     },
