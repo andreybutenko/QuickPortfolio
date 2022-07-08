@@ -78,7 +78,7 @@ function unmarshalPortfolios(
 
 /** Unmarshal portfolio from DynamoDB */
 function unmarshalPortfolio(
-  portfolio: AttributeMap
+  portfolio?: AttributeMap
 ): PortfolioDefinitions.IPortfolio | undefined {
   if (isUndefined(portfolio)) {
     return;
@@ -91,39 +91,33 @@ function unmarshalPortfolio(
       modifyTime: portfolio?.meta?.M?.modifyTime?.S as string,
     },
     content: {
-      title: portfolio?.content?.M?.title?.S as string,
-      name: portfolio?.content?.M?.name?.S as string,
-      headshot: portfolio?.content?.M?.headshot?.S as string,
-      about: portfolio?.content?.M?.about?.S as string,
+      title: portfolio?.content?.M?.title?.S || '',
+      name: portfolio?.content?.M?.name?.S || '',
+      headshot: portfolio?.content?.M?.headshot?.S || '',
+      about: portfolio?.content?.M?.about?.S || '',
       work: portfolio?.content?.M?.work?.L?.map((job) => ({
-        title: job.M?.title?.S,
-        picture: job.M?.picture?.S,
-        summary: job.M?.summary?.S,
-        viewCode: job.M?.viewCode?.S,
-        liveDemo: job.M?.liveDemo?.S,
+        title: job?.M?.title?.S || '',
+        picture: job?.M?.picture?.S || '',
+        summary: job?.M?.summary?.S || '',
+        viewCode: job?.M?.viewCode?.S || '',
+        liveDemo: job?.M?.liveDemo?.S || '',
       })) as PortfolioDefinitions.IWorkHistory[],
       projects: portfolio?.content?.M?.projects?.L?.map((project) => ({
-        title: project.M?.title?.S,
-        picture: project.M?.picture?.S,
-        summary: project.M?.summary?.S,
-        viewCode: project.M?.viewCode?.S,
-        liveDemo: project.M?.liveDemo?.S,
+        title: project?.M?.title?.S || '',
+        picture: project?.M?.picture?.S || '',
+        summary: project?.M?.summary?.S || '',
+        viewCode: project?.M?.viewCode?.S || '',
+        liveDemo: project?.M?.liveDemo?.S || '',
       })) as PortfolioDefinitions.IProjects[],
       skills: {
-        tech: portfolio?.content?.M?.skills.M?.tech as string[],
-        soft: portfolio?.content?.M?.skills.M?.soft as string[],
+        tech: portfolio?.content?.M?.skills?.M?.tech || [],
+        soft: portfolio?.content?.M?.skills?.M?.soft || [],
       } as PortfolioDefinitions.ISkills,
       contact: {
-        codeRepoLink: portfolio?.content?.M?.contact.M?.codeRepoLink as string,
-        linkedin: portfolio?.content?.M?.contact.M?.linkedin as string,
-        email: portfolio?.content?.M?.contact.M?.email as string,
+        codeRepoLink: portfolio?.content?.M?.contact?.M?.codeRepoLink || '',
+        linkedin: portfolio?.content?.M?.contact?.M?.linkedin || '',
+        email: portfolio?.content?.M?.contact?.M?.email || '',
       } as PortfolioDefinitions.IContact,
-      message: portfolio?.content?.M?.message?.L?.map((msg) => ({
-        firstName: msg.M?.firstName?.S,
-        lastName: msg.M?.lastNmae?.S,
-        subject: msg.M?.subject?.S,
-        messages: msg.M?.messages?.S,
-      })) as PortfolioDefinitions.IMessage[],
     },
   };
 }
@@ -142,54 +136,44 @@ function marshalPortfolio(
     },
     content: {
       M: {
-        title: { S: portfolio.content.title },
-        name: { S: portfolio.content.name },
-        headshot: { S: portfolio.content.headshot },
-        about: { S: portfolio.content.about },
+        title: { S: portfolio?.content?.title },
+        name: { S: portfolio?.content?.name },
+        headshot: { S: portfolio?.content?.headshot },
+        about: { S: portfolio?.content?.about },
 
         work: {
-          L: portfolio.content.work.map((job) => ({
+          L: portfolio?.content?.work?.map((job) => ({
             M: {
-              position: { S: job.position },
-              company: { S: job.company },
-              dateWorked: { S: job.dateWorked },
-              description: { S: job.description },
+              position: { S: job?.position },
+              company: { S: job?.company },
+              dateWorked: { S: job?.dateWorked },
+              description: { S: job?.description },
             },
           })),
         },
         projects: {
-          L: portfolio.content.projects.map((project) => ({
+          L: portfolio?.content?.projects?.map((project) => ({
             M: {
-              title: { S: project.title },
-              picture: { S: project.picture },
-              summary: { S: project.summary },
-              viewCode: { S: project.viewCode },
-              liveDemo: { S: project.liveDemo },
+              title: { S: project?.title },
+              picture: { S: project?.picture },
+              summary: { S: project?.summary },
+              viewCode: { S: project?.viewCode },
+              liveDemo: { S: project?.liveDemo },
             },
           })),
         },
         skills: {
           M: {
-            tech: { SS: portfolio.content.skills.tech },
-            soft: { SS: portfolio.content.skills.soft },
+            tech: { SS: portfolio?.content?.skills?.tech },
+            soft: { SS: portfolio?.content?.skills?.soft },
           },
         },
         contact: {
           M: {
-            codeRepoLink: { S: portfolio.content.contact.codeRepoLink },
-            linkedin: { S: portfolio.content.contact.linkedin },
-            email: { S: portfolio.content.contact.email },
+            codeRepoLink: { S: portfolio?.content?.contact?.codeRepoLink },
+            linkedin: { S: portfolio?.content?.contact?.linkedin },
+            email: { S: portfolio?.content?.contact?.email },
           },
-        },
-        message: {
-          L: portfolio.content.message.map((msg) => ({
-            M: {
-              firstName: { S: msg.firstName },
-              lastName: { S: msg.lastName },
-              subject: { S: msg.subject },
-              messages: { S: msg.messages },
-            },
-          })),
         },
       },
     },

@@ -15,6 +15,14 @@ const CreatePortfolioPage: NextPage = () => {
   const router = useRouter();
 
   const [title, setTitle] = useState('');
+  const [name, setName] = useState('');
+  const [headshot, setHeadShot] = useState('');
+  const [about, setAbout] = useState('');
+  const [work, setWork] = useState([]);
+  const [skills, setSkills] = useState({});
+  const [projects, setProjects] = useState([]);
+  const [contact, setContact] = useState({});
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   if (isSubmitting) {
@@ -26,9 +34,16 @@ const CreatePortfolioPage: NextPage = () => {
     const portfolio = await portfolioClient.put({
       content: {
         title,
+        name,
+        headshot,
+        about,
+        work,
+        skills,
+        projects,
+        contact,
       },
     });
-    router.push(`/portfolio/${portfolio.id}`);
+    router.push(`/portfolio/${portfolio?.id}`);
   };
 
   return (
