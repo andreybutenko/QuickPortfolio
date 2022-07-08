@@ -43,7 +43,7 @@ const CreatePortfolioPage: NextPage = () => {
         contact,
       },
     });
-    router.push(`/portfolio/${portfolio?.id}`);
+    router.push(`/portfolio/${portfolio.id}`);
   };
 
   return (
