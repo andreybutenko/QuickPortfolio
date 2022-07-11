@@ -51,6 +51,5 @@ export interface IPortfolio {
     skills: ISkills;
     projects: IProjects[];
     contact: IContact;
-    message: IMessage[];
   };
 }
