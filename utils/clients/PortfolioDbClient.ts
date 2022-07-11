@@ -8,9 +8,6 @@ import { IPortfolioClient } from 'models/clients';
 import * as PortfolioDefinitions from 'models/data/IPortfolio';
 import { getDynamoDbClient } from 'utils/api';
 import { isUndefined } from 'utils';
-import { CardContent, getSkeletonUtilityClass } from '@mui/material';
-import { workerData } from 'worker_threads';
-import { listConflictingAliasesMaxItemsInteger } from 'aws-sdk/clients/cloudfront';
 
 /** Client to interact with portfolio DynamoDB */
 export class PortfolioDbClient implements IPortfolioClient {
