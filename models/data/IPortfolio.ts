@@ -5,14 +5,16 @@ export interface IWorkHistory {
   dateWorked?: string;
   description?: string;
 }
-export interface IProjects {
-  title?: string;
+export interface ILink {
+  label: string;
+  url: string;
+}
+export interface IProject {
+  title: string;
   picture?: string;
   summary?: string;
-  viewCode?: string;
-  liveDemo?: string;
+  links: ILink[];
 }
-
 export interface ISkills {
   tech?: string[];
   soft?: string[];
@@ -24,13 +26,6 @@ export interface IContact {
   email?: string;
 }
 
-export interface IMessage {
-  firstName?: string;
-  lastName?: string;
-  senderEmail?: string;
-  subject?: string;
-  messages?: string;
-}
 export interface IPortfolio {
   /** Unique ID */
   id: string;
@@ -49,7 +44,7 @@ export interface IPortfolio {
     about: string;
     work: IWorkHistory[];
     skills: ISkills;
-    projects: IProjects[];
+    projects: IProject[];
     contact: IContact;
   };
 }

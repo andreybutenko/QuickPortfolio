@@ -93,19 +93,20 @@ function unmarshalPortfolio(
       headshot: portfolio?.content?.M?.headshot?.S || '',
       about: portfolio?.content?.M?.about?.S || '',
       work: portfolio?.content?.M?.work?.L?.map((job) => ({
-        title: job?.M?.title?.S || '',
-        picture: job?.M?.picture?.S || '',
-        summary: job?.M?.summary?.S || '',
-        viewCode: job?.M?.viewCode?.S || '',
-        liveDemo: job?.M?.liveDemo?.S || '',
+        position: job?.M?.position?.S || '',
+        company: job?.M?.company?.S || '',
+        dateWorked: job?.M?.dateWorked?.S || '',
+        description: job?.M?.description?.S || '',
       })) as PortfolioDefinitions.IWorkHistory[],
       projects: portfolio?.content?.M?.projects?.L?.map((project) => ({
         title: project?.M?.title?.S || '',
         picture: project?.M?.picture?.S || '',
         summary: project?.M?.summary?.S || '',
-        viewCode: project?.M?.viewCode?.S || '',
-        liveDemo: project?.M?.liveDemo?.S || '',
-      })) as PortfolioDefinitions.IProjects[],
+        links: project?.M?.link?.L?.map((link) => ({
+          label: link?.M?.label?.S || '',
+          url: link?.M?.url?.S || '',
+        })) as PortfolioDefinitions.ILink[],
+      })) as PortfolioDefinitions.IProject[],
       skills: {
         tech: portfolio?.content?.M?.skills?.M?.tech || [],
         soft: portfolio?.content?.M?.skills?.M?.soft || [],
@@ -154,8 +155,14 @@ function marshalPortfolio(
               title: { S: project?.title },
               picture: { S: project?.picture },
               summary: { S: project?.summary },
-              viewCode: { S: project?.viewCode },
-              liveDemo: { S: project?.liveDemo },
+              link: {
+                L: project?.links.map((link) => ({
+                  M: {
+                    label: { S: link?.label },
+                    url: { S: link?.url },
+                  },
+                })),
+              },
             },
           })),
         },
