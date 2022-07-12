@@ -108,12 +108,14 @@ function unmarshalPortfolio(
         })) as PortfolioDefinitions.ILink[],
       })) as PortfolioDefinitions.IProject[],
       skills: {
-        tech: portfolio?.content?.M?.skills?.M?.tech || [],
-        soft: portfolio?.content?.M?.skills?.M?.soft || [],
+        tech: portfolio?.content?.M?.skills?.M?.tech?.L || [],
+        soft: portfolio?.content?.M?.skills?.M?.soft?.L || [],
       } as PortfolioDefinitions.ISkills,
       contact: {
-        codeRepoLink: portfolio?.content?.M?.contact?.M?.codeRepoLink || '',
-        linkedin: portfolio?.content?.M?.contact?.M?.linkedin || '',
+        links: portfolio?.content?.M?.contact?.M?.link?.L?.map((link) => ({
+          label: link?.M?.label?.S || '',
+          url: link?.M?.url?.S || '',
+        })) as PortfolioDefinitions.ILink[],
         email: portfolio?.content?.M?.contact?.M?.email || '',
       } as PortfolioDefinitions.IContact,
     },
@@ -156,7 +158,7 @@ function marshalPortfolio(
               picture: { S: project?.picture },
               summary: { S: project?.summary },
               link: {
-                L: project?.links.map((link) => ({
+                L: project?.links?.map((link) => ({
                   M: {
                     label: { S: link?.label },
                     url: { S: link?.url },
@@ -168,14 +170,28 @@ function marshalPortfolio(
         },
         skills: {
           M: {
-            tech: { SS: portfolio?.content?.skills?.tech },
-            soft: { SS: portfolio?.content?.skills?.soft },
+            tech: {
+              L: portfolio?.content?.skills?.tech?.map((skill) => ({
+                S: skill,
+              })),
+            },
+            soft: {
+              L: portfolio?.content?.skills?.tech?.map((skill) => ({
+                S: skill,
+              })),
+            },
           },
         },
         contact: {
           M: {
-            codeRepoLink: { S: portfolio?.content?.contact?.codeRepoLink },
-            linkedin: { S: portfolio?.content?.contact?.linkedin },
+            link: {
+              L: portfolio?.content?.contact?.links?.map((link) => ({
+                M: {
+                  label: { S: link?.label },
+                  url: { S: link?.url },
+                },
+              })),
+            },
             email: { S: portfolio?.content?.contact?.email },
           },
         },

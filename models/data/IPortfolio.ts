@@ -1,7 +1,7 @@
 /** Portfolio data */
 export interface IWorkHistory {
-  position?: string;
-  company?: string;
+  position: string;
+  company: string;
   dateWorked?: string;
   description?: string;
 }
@@ -13,7 +13,7 @@ export interface IProject {
   title: string;
   picture?: string;
   summary?: string;
-  links: ILink[];
+  links?: ILink[];
 }
 export interface ISkills {
   tech?: string[];
@@ -21,8 +21,7 @@ export interface ISkills {
 }
 
 export interface IContact {
-  codeRepoLink?: string;
-  linkedin?: string;
+  links?: ILink[];
   email?: string;
 }
 
