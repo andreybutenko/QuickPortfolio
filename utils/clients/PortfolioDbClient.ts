@@ -176,7 +176,7 @@ function marshalPortfolio(
               })),
             },
             soft: {
-              L: portfolio?.content?.skills?.tech?.map((skill) => ({
+              L: portfolio?.content?.skills?.soft?.map((skill) => ({
                 S: skill,
               })),
             },
