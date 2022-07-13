@@ -36,6 +36,13 @@ export default async function handler(
       },
       content: {
         title: params.content.title,
+        name: params.content.name,
+        headshot: params.content.headshot,
+        about: params.content.about,
+        work: params.content.work,
+        skills: params.content.skills,
+        projects: params.content.projects,
+        contact: params.content.contact,
       },
     };
 

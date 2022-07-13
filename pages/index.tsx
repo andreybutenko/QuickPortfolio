@@ -22,9 +22,9 @@ const Home: NextPage = () => {
       <Button variant="contained" href="/portfolio/create">
         Create Portfolio
       </Button>
-      {portfolios.length === 0 && <Alert severity="info">No Portfolios</Alert>}
+      {portfolios?.length === 0 && <Alert severity="info">No Portfolios</Alert>}
       <Stack spacing={2}>
-        {portfolios.map((portfolio) => (
+        {portfolios?.map((portfolio) => (
           <Card key={portfolio.id}>
             <CardContent>
               <Typography variant="h3">{portfolio.content.title}</Typography>
