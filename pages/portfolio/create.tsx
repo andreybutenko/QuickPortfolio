@@ -8,6 +8,7 @@ import CreatePortfolioContext from 'components/create/CreatePorfolioContext';
 import { IWorkHistory, ISkills, IProject, IContact } from 'models/data/';
 import Skills from 'components/create/Skills';
 import WorkHistory from 'components/create/WorkHistory';
+import Contact from 'components/create/Contact';
 import { stringify } from 'querystring';
 const CreatePortfolioPage: NextPage = () => {
   const portfolioClient = new PortfolioApiClient();
@@ -16,12 +17,10 @@ const CreatePortfolioPage: NextPage = () => {
   const [name, setName] = useState('');
   const [headshot, setHeadShot] = useState('');
   const [about, setAbout] = useState('');
-  const [work, setWork] = useState<IWorkHistory[]>([
-    { position: '', company: '', dateWorked: '', description: '' },
-  ]);
+  const [work, setWork] = useState<IWorkHistory[]>([]);
   const [skills, setSkills] = useState<ISkills>({ tech: [], soft: [] });
   const [projects, setProjects] = useState<IProject[]>([]);
-  const [contact, setContact] = useState<IContact>({});
+  const [contact, setContact] = useState<IContact>({ email: '', links: [] });
   const [isSubmitting, setIsSubmitting] = useState(false);
   if (isSubmitting) {
     return <CircularProgress />;
@@ -44,7 +43,7 @@ const CreatePortfolioPage: NextPage = () => {
     });
     router.push(`/portfolio/${portfolio?.id}`);
   };
-  console.log(work[0]);
+  console.log(contact);
   return (
     <CreatePortfolioContext.Provider
       value={{
@@ -66,7 +65,8 @@ const CreatePortfolioPage: NextPage = () => {
         setContact,
       }}
     >
-      <WorkHistory />
+      {/* <WorkHistory /> */}
+      <Contact />
       {/* <Introduction /> */}
       {/* <Skills /> */}
 
