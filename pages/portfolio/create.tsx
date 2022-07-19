@@ -9,6 +9,8 @@ import { IWorkHistory, ISkills, IProject, IContact } from 'models/data/';
 import Skills from 'components/create/Skills';
 import WorkHistory from 'components/create/WorkHistory';
 import Contact from 'components/create/Contact';
+//import {Skills, Introduction, WorkHistory, Contact, Project} from 'components/create';
+import Project from 'components/create/Project';
 import { stringify } from 'querystring';
 const CreatePortfolioPage: NextPage = () => {
   const portfolioClient = new PortfolioApiClient();
@@ -43,7 +45,7 @@ const CreatePortfolioPage: NextPage = () => {
     });
     router.push(`/portfolio/${portfolio?.id}`);
   };
-  console.log(contact);
+  console.log(projects);
   return (
     <CreatePortfolioContext.Provider
       value={{
@@ -65,10 +67,11 @@ const CreatePortfolioPage: NextPage = () => {
         setContact,
       }}
     >
-      {/* <WorkHistory /> */}
+      <Introduction />
+      <WorkHistory />
+      <Skills />
+      <Project />
       <Contact />
-      {/* <Introduction /> */}
-      {/* <Skills /> */}
 
       <Button variant="outlined" disabled={isSubmitting} onClick={onSubmit}>
         {isSubmitting ? 'Submitting...' : 'Create'}
