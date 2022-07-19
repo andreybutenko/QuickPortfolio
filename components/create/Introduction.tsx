@@ -29,6 +29,7 @@ const Introduction = () => {
         }}
         variant="standard"
       />
+
       <TextField
         label={'headshot'}
         onChange={(event) => {

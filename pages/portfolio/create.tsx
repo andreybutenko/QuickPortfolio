@@ -15,6 +15,7 @@ import { stringify } from 'querystring';
 const CreatePortfolioPage: NextPage = () => {
   const portfolioClient = new PortfolioApiClient();
   const router = useRouter();
+  const [page, setPage] = useState(0);
   const [title, setTitle] = useState('');
   const [name, setName] = useState('');
   const [headshot, setHeadShot] = useState('');
@@ -44,8 +45,28 @@ const CreatePortfolioPage: NextPage = () => {
       //
     });
     router.push(`/portfolio/${portfolio?.id}`);
+    console.log(portfolio);
   };
-  console.log(projects);
+  const pageTitles = [
+    'Personal Information',
+    'Work History',
+    'Skills',
+    'Projects',
+    'Contact Information',
+  ];
+  const PageDisplay = () => {
+    if (page === 0) {
+      return <Introduction />;
+    } else if (page === 1) {
+      return <WorkHistory />;
+    } else if (page === 2) {
+      return <Skills />;
+    } else if (page === 3) {
+      return <Project />;
+    } else {
+      return <Contact />;
+    }
+  };
   return (
     <CreatePortfolioContext.Provider
       value={{
@@ -67,12 +88,31 @@ const CreatePortfolioPage: NextPage = () => {
         setContact,
       }}
     >
-      <Introduction />
+      <div>
+        <Typography>{pageTitles[page]}</Typography>
+      </div>
+      {/* <Introduction />
       <WorkHistory />
       <Skills />
       <Project />
-      <Contact />
-
+      <Contact /> */}
+      <div>{PageDisplay()}</div>
+      <button
+        disabled={page == 0}
+        onClick={() => {
+          setPage((currPage) => currPage - 1);
+        }}
+      >
+        Prev
+      </button>
+      <button
+        disabled={page == 4}
+        onClick={() => {
+          setPage((currPage) => currPage + 1);
+        }}
+      >
+        Next
+      </button>
       <Button variant="outlined" disabled={isSubmitting} onClick={onSubmit}>
         {isSubmitting ? 'Submitting...' : 'Create'}
       </Button>
