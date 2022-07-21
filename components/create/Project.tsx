@@ -1,12 +1,9 @@
 import * as React from 'react';
 import CreatePortfolioContext from 'components/create/CreatePorfolioContext';
-import { TextField, Input, Stack, Button, Typography } from '@mui/material';
-import { useCallback, useState, useContext, useRef, RefObject } from 'react';
+import { TextField, Stack, Button } from '@mui/material';
+import { useContext, useRef, RefObject } from 'react';
 import { IProject, ILink } from 'models/data/';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import LanguageIcon from '@mui/icons-material/Language';
-import CodeIcon from '@mui/icons-material/Code';
-import { linkSync } from 'fs';
+import { StyledTextField, StyledButton } from 'components/create/Styled';
 
 const Project = () => {
   const formRef = useRef() as RefObject<HTMLFormElement>;
@@ -25,10 +22,6 @@ const Project = () => {
     url: '',
   };
   const { projects, setProjects } = useContext(CreatePortfolioContext);
-  // const [position, setPosition] = useState('');
-  // const [company, setCompany] = useState('');
-  // const [dateWorked, setDateWorked] = useState('');
-  // const [description, setDescription] = useState('');
   const onSubmit = async () => {
     entry.links?.push(source);
     entry.links?.push(demo);
@@ -36,60 +29,46 @@ const Project = () => {
     setProjects([...projects]);
     formRef.current?.reset();
   };
-  // const selectLinkIcon = (link: ILink) => {
-  //   switch (link.label.toLowerCase()) {
-  //     case 'source':
-  //       link.label = 'source';
-  //       return <CodeIcon />;
-
-  //     default:
-  //       return <LanguageIcon />;
-  //   }
-  // };
   return (
     <form ref={formRef}>
       <Stack direction="column" spacing={1}>
-        <TextField
+        <StyledTextField
           label={'Title'}
-          variant="standard"
           onChange={(element) => {
             entry.title = element.target.value;
           }}
         />
-        <TextField
+        <StyledTextField
           label={'Picture'}
-          variant="standard"
           onChange={(element) => {
             entry.picture = element.target.value;
           }}
         />
-        <TextField
+        <StyledTextField
           label={'Summary'}
-          variant="standard"
+          multiline
+          rows={4}
           onChange={(element) => {
             entry.summary = element.target.value;
           }}
         />
-
-        <TextField
+        <StyledTextField
           label={'Link to Source Code'}
-          variant="standard"
           onChange={(element) => {
             source.label = 'source';
             source.url = element.target.value;
           }}
         />
-        <TextField
+        <StyledTextField
           label={'Link to Live Demo'}
-          variant="standard"
           onChange={(element) => {
             demo.label = 'demo';
             demo.url = element.target.value;
           }}
         />
-        <Button variant="outlined" onClick={onSubmit}>
+        <StyledButton variant="outlined" onClick={onSubmit}>
           Add Project
-        </Button>
+        </StyledButton>
       </Stack>
     </form>
   );

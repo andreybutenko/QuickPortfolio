@@ -1,9 +1,8 @@
 import * as React from 'react';
 import CreatePortfolioContext from 'components/create/CreatePorfolioContext';
-import { TextField, Input, Stack, Button } from '@mui/material';
-import { useCallback, useState, useContext, useRef, RefObject } from 'react';
-import { IWorkHistory } from 'models/data/';
-
+import { Stack, Button } from '@mui/material';
+import { useContext, useRef, RefObject } from 'react';
+import { StyledTextField, StyledButton } from 'components/create/Styled';
 const WorkHistory = () => {
   const formRef = useRef() as RefObject<HTMLFormElement>;
   const entry = {
@@ -13,10 +12,6 @@ const WorkHistory = () => {
     description: '',
   };
   const { work, setWork } = useContext(CreatePortfolioContext);
-  // const [position, setPosition] = useState('');
-  // const [company, setCompany] = useState('');
-  // const [dateWorked, setDateWorked] = useState('');
-  // const [description, setDescription] = useState('');
   const onSubmit = async () => {
     work.push(entry);
     setWork([...work]);
@@ -25,37 +20,35 @@ const WorkHistory = () => {
   return (
     <form ref={formRef}>
       <Stack direction="column" spacing={1}>
-        <TextField
+        <StyledTextField
           label={'Position'}
-          variant="standard"
           onChange={(element) => {
             entry.position = element.target.value;
           }}
         />
-        <TextField
+        <StyledTextField
           label={'Company'}
-          variant="standard"
           onChange={(element) => {
             entry.company = element.target.value;
           }}
         />
-        <TextField
+        <StyledTextField
           label={'Interval of employement'}
-          variant="standard"
           onChange={(element) => {
             entry.dateWorked = element.target.value;
           }}
         />
-        <TextField
-          label={'Job Description'}
-          variant="standard"
+        <StyledTextField
+          label={'Summary of what you did'}
+          multiline
+          rows={4}
           onChange={(element) => {
             entry.description = element.target.value;
           }}
         />
-        <Button variant="outlined" onClick={onSubmit}>
+        <StyledButton variant="outlined" onClick={onSubmit}>
           Add Work History
-        </Button>
+        </StyledButton>
       </Stack>
     </form>
   );

@@ -1,20 +1,13 @@
 import * as React from 'react';
 import CreatePortfolioContext from 'components/create/CreatePorfolioContext';
-import {
-  TextField,
-  Input,
-  Stack,
-  Button,
-  Typography,
-  Grid,
-} from '@mui/material';
-import { useCallback, useState, useContext, useRef, RefObject } from 'react';
-import { IContact, ILink } from 'models/data/';
+import { Stack, Button, Typography, Link } from '@mui/material';
+import { useContext, useRef, RefObject } from 'react';
+import { ILink } from 'models/data/';
 import EmailIcon from '@mui/icons-material/Email';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LanguageIcon from '@mui/icons-material/Language';
-
+import { StyledTextField } from 'components/create/Styled';
 const Contact = () => {
   const formRef = useRef() as RefObject<HTMLFormElement>;
   const link: ILink = {
@@ -24,12 +17,11 @@ const Contact = () => {
   const { contact, setContact } = useContext(CreatePortfolioContext);
   const onAddLink = () => {
     contact.links?.push(link);
-    console.log(contact.links);
+
     setContact({ ...contact });
     formRef.current?.reset();
   };
   const onSubmit = () => {
-    // console.log(contact.links);
     setContact({ ...contact });
   };
   const selectLinkIcon = (link: ILink) => {
@@ -45,35 +37,39 @@ const Contact = () => {
         return <LanguageIcon />;
     }
   };
-
+  const openInNewTab = (url: string | URL | undefined) => {
+    const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+    if (newWindow) newWindow.opener = null;
+  };
   return (
     <div>
-      <Stack direction="column" spacing={1}>
-        <TextField
+      <Stack direction="column">
+        <StyledTextField
           label={'Email Address'}
-          variant="standard"
           onChange={(element) => {
             contact.email = element.target.value;
           }}
         />
         <form ref={formRef}>
-          <TextField
-            label={'Label'}
-            variant="standard"
-            onChange={(element) => {
-              link.label = element.target.value;
-            }}
-          />
-          <TextField
-            label={'URL'}
-            variant="standard"
-            onChange={(element) => {
-              link.url = element.target.value;
-            }}
-          />
+          <Stack direction="column">
+            <StyledTextField
+              label={'Label'}
+              onChange={(element) => {
+                link.label = element.target.value;
+              }}
+            />
+            <StyledTextField
+              label={'URL'}
+              onChange={(element) => {
+                link.url = element.target.value;
+              }}
+            />
+          </Stack>
         </form>
       </Stack>
-      {/* <Grid container sx={{ color: 'text.primary' }}> */}
+      <Button variant="outlined" onClick={onAddLink}>
+        Add Link
+      </Button>
       <div
         style={{
           display: 'flex',
@@ -98,16 +94,17 @@ const Contact = () => {
           >
             {selectLinkIcon(link)}
             <span>
-              <Typography>{link.label}</Typography>
+              <Typography>
+                <Link href="#" onClick={() => openInNewTab(link.url)}>
+                  {link.label}
+                </Link>
+              </Typography>
             </span>
           </div>
         </Stack>
       ))}
-      <Button variant="outlined" onClick={onAddLink}>
-        Add Link
-      </Button>
       <Button variant="outlined" onClick={onSubmit}>
-        Review your information
+        Review Your Information
       </Button>
     </div>
   );

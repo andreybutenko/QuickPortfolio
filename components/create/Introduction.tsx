@@ -1,5 +1,9 @@
 import React, { useCallback, useContext } from 'react';
-import { TextField } from '@mui/material';
+import { Stack, TextField } from '@mui/material';
+import {
+  StyledTextField,
+  StyledParagraphTextField,
+} from 'components/create/Styled';
 
 import CreatePortfolioContext from 'components/create/CreatePorfolioContext';
 const Introduction = () => {
@@ -15,35 +19,35 @@ const Introduction = () => {
   } = useContext(CreatePortfolioContext);
   return (
     <div>
-      <TextField
-        label={'title'}
-        onChange={(event) => {
-          setTitle(event.target.value);
-        }}
-        variant="standard"
-      />
-      <TextField
-        label={'name'}
-        onChange={(event) => {
-          setName(event.target.value);
-        }}
-        variant="standard"
-      />
+      <Stack direction="column" spacing={1}>
+        <StyledTextField
+          label={'Title your portfolio'}
+          onChange={(event) => {
+            setTitle(event.target.value);
+          }}
+        />
+        <StyledTextField
+          label={'Full Name'}
+          onChange={(event) => {
+            setName(event.target.value);
+          }}
+        />
 
-      <TextField
-        label={'headshot'}
-        onChange={(event) => {
-          setHeadShot(event.target.value);
-        }}
-        variant="standard"
-      />
-      <TextField
-        label={'about'}
-        onChange={(event) => {
-          setAbout(event.target.value);
-        }}
-        variant="standard"
-      />
+        <StyledTextField
+          label={'Upload Picture'}
+          onChange={(event) => {
+            setHeadShot(event.target.value);
+          }}
+        />
+        <StyledParagraphTextField
+          label={'About Yourself'}
+          multiline
+          rows={4}
+          onChange={(event) => {
+            setAbout(event.target.value);
+          }}
+        />
+      </Stack>
     </div>
   );
 };

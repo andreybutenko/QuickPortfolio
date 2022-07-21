@@ -12,6 +12,7 @@ import Contact from 'components/create/Contact';
 //import {Skills, Introduction, WorkHistory, Contact, Project} from 'components/create';
 import Project from 'components/create/Project';
 import { stringify } from 'querystring';
+import Review from 'components/create/Review';
 const CreatePortfolioPage: NextPage = () => {
   const portfolioClient = new PortfolioApiClient();
   const router = useRouter();
@@ -63,10 +64,24 @@ const CreatePortfolioPage: NextPage = () => {
       return <Skills />;
     } else if (page === 3) {
       return <Project />;
-    } else {
+    } else if (page === 4) {
       return <Contact />;
+    } else {
+      return (
+        <div>
+          <Review />
+          <Button
+            variant="contained"
+            disabled={isSubmitting}
+            onClick={onSubmit}
+          >
+            {isSubmitting ? 'Submitting...' : 'Create'}
+          </Button>
+        </div>
+      );
     }
   };
+  console.log(title);
   return (
     <CreatePortfolioContext.Provider
       value={{
@@ -89,32 +104,28 @@ const CreatePortfolioPage: NextPage = () => {
       }}
     >
       <div>
-        <Typography>{pageTitles[page]}</Typography>
+        <Typography variant="h3">{pageTitles[page]}</Typography>
       </div>
-      {/* <Introduction />
-      <WorkHistory />
-      <Skills />
-      <Project />
-      <Contact /> */}
       <div>{PageDisplay()}</div>
-      <button
+      <Button
+        variant="outlined"
+        color="secondary"
         disabled={page == 0}
         onClick={() => {
           setPage((currPage) => currPage - 1);
         }}
       >
         Prev
-      </button>
-      <button
-        disabled={page == 4}
+      </Button>
+      <Button
+        variant="outlined"
+        color="primary"
+        disabled={page == 5}
         onClick={() => {
           setPage((currPage) => currPage + 1);
         }}
       >
         Next
-      </button>
-      <Button variant="outlined" disabled={isSubmitting} onClick={onSubmit}>
-        {isSubmitting ? 'Submitting...' : 'Create'}
       </Button>
     </CreatePortfolioContext.Provider>
   );
