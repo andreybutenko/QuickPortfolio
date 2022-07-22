@@ -3,7 +3,7 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import CreatePortfolioContext from 'components/create/CreatePorfolioContext';
 import { Typography } from '@mui/material';
-import { useState, useContext, useRef, RefObject } from 'react';
+import { useContext } from 'react';
 import { Divider } from '@mui/material';
 
 const Review = () => {

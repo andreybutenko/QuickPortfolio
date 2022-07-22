@@ -2,16 +2,13 @@ import * as React from 'react';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import CreatePortfolioContext from 'components/create/CreatePorfolioContext';
-import {
-  StyledTextField,
-  StyledParagraphTextField,
-} from 'components/create/Styled';
-import { useState, useContext, useRef, RefObject } from 'react';
+import { StyledTextField } from 'components/create/Styled';
+import { useState, useContext } from 'react';
 const Skills = () => {
   const { skills, setSkills } = useContext(CreatePortfolioContext);
   const [techSkill, setTechSkill] = useState('');
   const [softSkill, setSoftSkill] = useState('');
-  const formRef = useRef() as RefObject<HTMLFormElement>;
+
   const handleClick = () => {
     console.info('You clicked the Chip.');
   };
