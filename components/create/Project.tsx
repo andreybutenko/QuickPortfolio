@@ -7,25 +7,25 @@ import { StyledTextField, StyledButton } from 'components/create/Styled';
 
 const Project = () => {
   const formRef = useRef() as RefObject<HTMLFormElement>;
-  const entry: IProject = {
+  const draftEntry: IProject = {
     title: '',
     picture: '',
     summary: '',
     links: [],
   };
-  const source: ILink = {
+  const draftSource: ILink = {
     label: '',
     url: '',
   };
-  const demo: ILink = {
+  const draftDemo: ILink = {
     label: '',
     url: '',
   };
   const { projects, setProjects } = useContext(CreatePortfolioContext);
   const onSubmit = async () => {
-    entry.links?.push(source);
-    entry.links?.push(demo);
-    projects.push(entry);
+    draftEntry.links?.push(draftSource);
+    draftEntry.links?.push(draftDemo);
+    projects.push(draftEntry);
     setProjects([...projects]);
     formRef.current?.reset();
   };
@@ -35,13 +35,13 @@ const Project = () => {
         <StyledTextField
           label={'Title'}
           onChange={(element) => {
-            entry.title = element.target.value;
+            draftEntry.title = element.target.value;
           }}
         />
         <StyledTextField
           label={'Picture'}
           onChange={(element) => {
-            entry.picture = element.target.value;
+            draftEntry.picture = element.target.value;
           }}
         />
         <StyledTextField
@@ -49,21 +49,21 @@ const Project = () => {
           multiline
           rows={4}
           onChange={(element) => {
-            entry.summary = element.target.value;
+            draftEntry.summary = element.target.value;
           }}
         />
         <StyledTextField
           label={'Link to Source Code'}
           onChange={(element) => {
-            source.label = 'source';
-            source.url = element.target.value;
+            draftSource.label = 'source';
+            draftSource.url = element.target.value;
           }}
         />
         <StyledTextField
           label={'Link to Live Demo'}
           onChange={(element) => {
-            demo.label = 'demo';
-            demo.url = element.target.value;
+            draftDemo.label = 'demo';
+            draftDemo.url = element.target.value;
           }}
         />
         <StyledButton variant="outlined" onClick={onSubmit}>

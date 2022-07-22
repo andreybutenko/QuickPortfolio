@@ -10,13 +10,13 @@ import LanguageIcon from '@mui/icons-material/Language';
 import { StyledTextField } from 'components/create/Styled';
 const Contact = () => {
   const formRef = useRef() as RefObject<HTMLFormElement>;
-  const link: ILink = {
+  const draftLink: ILink = {
     label: '',
     url: '',
   };
   const { contact, setContact } = useContext(CreatePortfolioContext);
   const onAddLink = () => {
-    contact.links?.push(link);
+    contact.links?.push(draftLink);
 
     setContact({ ...contact });
     formRef.current?.reset();
@@ -25,11 +25,11 @@ const Contact = () => {
     setContact({ ...contact });
   };
   const selectLinkIcon = (link: ILink) => {
-    switch (link.label.toLowerCase()) {
-      case 'linkedin':
+    switch (true) {
+      case link.url.includes('linkedin.com'):
         link.label = 'LinkedIn';
         return <LinkedInIcon />;
-      case 'github':
+      case link.url.includes('github.com'):
         link.label = 'GitHub';
         return <GitHubIcon />;
 
@@ -37,10 +37,7 @@ const Contact = () => {
         return <LanguageIcon />;
     }
   };
-  const openInNewTab = (url: string | URL | undefined) => {
-    const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
-    if (newWindow) newWindow.opener = null;
-  };
+
   return (
     <div>
       <Stack direction="column">
@@ -55,13 +52,13 @@ const Contact = () => {
             <StyledTextField
               label={'Label'}
               onChange={(element) => {
-                link.label = element.target.value;
+                draftLink.label = element.target.value;
               }}
             />
             <StyledTextField
               label={'URL'}
               onChange={(element) => {
-                link.url = element.target.value;
+                draftLink.url = element.target.value;
               }}
             />
           </Stack>
@@ -95,7 +92,7 @@ const Contact = () => {
             {selectLinkIcon(link)}
             <span>
               <Typography>
-                <Link href="#" onClick={() => openInNewTab(link.url)}>
+                <Link href={link.url} target="_blank" rel="noreferrer noopener">
                   {link.label}
                 </Link>
               </Typography>

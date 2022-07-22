@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction, useContext } from 'react';
 import * as React from 'react';
 import { IWorkHistory, ISkills, IProject, IContact } from 'models/data/';
-import { KinesisVideoArchivedMedia } from 'aws-sdk';
 
 const CreatePortfolioContext = React.createContext({
   title: '',
