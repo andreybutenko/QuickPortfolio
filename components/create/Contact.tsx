@@ -8,21 +8,17 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LanguageIcon from '@mui/icons-material/Language';
 import { StyledTextField } from 'components/create/Styled';
+import LinksEditor from './common/LinksEditor';
 const Contact = () => {
-  const formRef = useRef() as RefObject<HTMLFormElement>;
-  const link: ILink = {
-    label: '',
-    url: '',
-  };
   const { contact, setContact } = useContext(CreatePortfolioContext);
-  const onAddLink = () => {
-    contact.links?.push(link);
-
-    setContact({ ...contact });
-    formRef.current?.reset();
-  };
   const onSubmit = () => {
     setContact({ ...contact });
+  };
+  const setLinks = (links: ILink[]) => {
+    setContact({
+      ...contact,
+      links,
+    });
   };
   const selectLinkIcon = (link: ILink) => {
     switch (link.label.toLowerCase()) {
@@ -47,29 +43,15 @@ const Contact = () => {
         <StyledTextField
           label={'Email Address'}
           onChange={(element) => {
-            contact.email = element.target.value;
+            setContact({
+              ...contact,
+              email: element.target.value,
+            });
           }}
+          value={contact.email}
         />
-        <form ref={formRef}>
-          <Stack direction="column">
-            <StyledTextField
-              label={'Label'}
-              onChange={(element) => {
-                link.label = element.target.value;
-              }}
-            />
-            <StyledTextField
-              label={'URL'}
-              onChange={(element) => {
-                link.url = element.target.value;
-              }}
-            />
-          </Stack>
-        </form>
+        <LinksEditor links={contact.links || []} setLinks={setLinks} />
       </Stack>
-      <Button variant="outlined" onClick={onAddLink}>
-        Add Link
-      </Button>
       <div
         style={{
           display: 'flex',

@@ -1,74 +1,81 @@
 import * as React from 'react';
 import CreatePortfolioContext from 'components/create/CreatePorfolioContext';
-import { TextField, Stack, Button } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import { useContext, useRef, RefObject } from 'react';
 import { IProject, ILink } from 'models/data/';
 import { StyledTextField, StyledButton } from 'components/create/Styled';
+import LinksEditor from './common/LinksEditor';
 
 const Project = () => {
-  const formRef = useRef() as RefObject<HTMLFormElement>;
-  const entry: IProject = {
+  // useState gives you more control over the data being input/displayed
+  // and is more idiomatic for React compared to how this was previously implemented
+  const [draftEntry, setDraftEntry] = React.useState<IProject>({
     title: '',
     picture: '',
     summary: '',
     links: [],
-  };
-  const source: ILink = {
-    label: '',
-    url: '',
-  };
-  const demo: ILink = {
-    label: '',
-    url: '',
-  };
+  });
   const { projects, setProjects } = useContext(CreatePortfolioContext);
-  const onSubmit = async () => {
-    entry.links?.push(source);
-    entry.links?.push(demo);
-    projects.push(entry);
-    setProjects([...projects]);
-    formRef.current?.reset();
+  const setLinks = (links: ILink[]) => {
+    setDraftEntry({
+      ...draftEntry,
+      links,
+    });
+  };
+  const onSubmit = () => {
+    setProjects([...projects, draftEntry]);
+    setDraftEntry({
+      title: '',
+      picture: '',
+      summary: '',
+      links: [],
+    });
   };
   return (
-    <form ref={formRef}>
+    <form>
       <Stack direction="column" spacing={1}>
         <StyledTextField
           label={'Title'}
           onChange={(element) => {
-            entry.title = element.target.value;
+            setDraftEntry({
+              ...draftEntry,
+              title: element.target.value,
+            });
           }}
+          value={draftEntry.title}
         />
         <StyledTextField
           label={'Picture'}
           onChange={(element) => {
-            entry.picture = element.target.value;
+            setDraftEntry({
+              ...draftEntry,
+              picture: element.target.value,
+            });
           }}
+          value={draftEntry.picture}
         />
         <StyledTextField
           label={'Summary'}
           multiline
           rows={4}
           onChange={(element) => {
-            entry.summary = element.target.value;
+            setDraftEntry({
+              ...draftEntry,
+              summary: element.target.value,
+            });
           }}
+          value={draftEntry.summary}
         />
-        <StyledTextField
-          label={'Link to Source Code'}
-          onChange={(element) => {
-            source.label = 'source';
-            source.url = element.target.value;
-          }}
-        />
-        <StyledTextField
-          label={'Link to Live Demo'}
-          onChange={(element) => {
-            demo.label = 'demo';
-            demo.url = element.target.value;
-          }}
-        />
+        <LinksEditor links={draftEntry.links || []} setLinks={setLinks} />
         <StyledButton variant="outlined" onClick={onSubmit}>
           Add Project
         </StyledButton>
+        <Typography>Your projects</Typography>
+        <ul>
+          {projects.map((project, index) => (
+            <li key={index}>{project.title}</li>
+          ))}
+        </ul>
       </Stack>
     </form>
   );
