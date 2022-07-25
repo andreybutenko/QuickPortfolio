@@ -9,16 +9,10 @@ const Skills = () => {
   const [techSkill, setTechSkill] = useState('');
   const [softSkill, setSoftSkill] = useState('');
 
-  const handleClick = () => {
-    console.info('You clicked the Chip.');
-  };
-  const handleDelete = () => {
-    console.info('You clicked the delete icon.');
-  };
   return (
     <div>
       <StyledTextField
-        label={'Tech Skills'}
+        label="Tech Skills"
         value={techSkill}
         onChange={(event) => {
           setTechSkill(event.target.value);
@@ -33,16 +27,11 @@ const Skills = () => {
       />
       <Stack direction="row" spacing={1}>
         {skills.tech?.map((tech, index: number) => (
-          <Chip
-            key={index}
-            label={tech}
-            onClick={handleClick}
-            onDelete={handleDelete}
-          />
+          <Chip key={index} label={tech} />
         ))}
       </Stack>
       <StyledTextField
-        label={'Soft Skills'}
+        label="Soft Skills"
         value={softSkill}
         onChange={(event) => {
           setSoftSkill(event.target.value);
@@ -57,12 +46,7 @@ const Skills = () => {
       />
       <Stack direction="row" spacing={1}>
         {skills.soft?.map((soft, index: number) => (
-          <Chip
-            key={index}
-            label={soft}
-            onClick={handleClick}
-            onDelete={handleDelete}
-          />
+          <Chip key={index} label={soft} />
         ))}
       </Stack>
     </div>

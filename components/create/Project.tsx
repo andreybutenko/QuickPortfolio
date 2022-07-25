@@ -22,7 +22,7 @@ const Project = () => {
     url: '',
   };
   const { projects, setProjects } = useContext(CreatePortfolioContext);
-  const onSubmit = async () => {
+  const onSubmit = () => {
     draftEntry.links?.push(draftSource);
     draftEntry.links?.push(draftDemo);
     projects.push(draftEntry);
@@ -33,19 +33,19 @@ const Project = () => {
     <form ref={formRef}>
       <Stack direction="column" spacing={1}>
         <StyledTextField
-          label={'Title'}
+          label="Title"
           onChange={(element) => {
             draftEntry.title = element.target.value;
           }}
         />
         <StyledTextField
-          label={'Picture'}
+          label="Picture"
           onChange={(element) => {
             draftEntry.picture = element.target.value;
           }}
         />
         <StyledTextField
-          label={'Summary'}
+          label="Summary"
           multiline
           rows={4}
           onChange={(element) => {
@@ -53,14 +53,14 @@ const Project = () => {
           }}
         />
         <StyledTextField
-          label={'Link to Source Code'}
+          label="Link to Source Code"
           onChange={(element) => {
             draftSource.label = 'source';
             draftSource.url = element.target.value;
           }}
         />
         <StyledTextField
-          label={'Link to Live Demo'}
+          label="Link to Live Demo"
           onChange={(element) => {
             draftDemo.label = 'demo';
             draftDemo.url = element.target.value;

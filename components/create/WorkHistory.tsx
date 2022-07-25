@@ -12,7 +12,7 @@ const WorkHistory = () => {
     description: '',
   };
   const { work, setWork } = useContext(CreatePortfolioContext);
-  const onSubmit = async () => {
+  const onSubmit = () => {
     work.push(entry);
     setWork([...work]);
     formRef.current?.reset();
@@ -21,25 +21,25 @@ const WorkHistory = () => {
     <form ref={formRef}>
       <Stack direction="column" spacing={1}>
         <StyledTextField
-          label={'Position'}
+          label="Position"
           onChange={(element) => {
             entry.position = element.target.value;
           }}
         />
         <StyledTextField
-          label={'Company'}
+          label="Company"
           onChange={(element) => {
             entry.company = element.target.value;
           }}
         />
         <StyledTextField
-          label={'Interval of employement'}
+          label="Interval of employement"
           onChange={(element) => {
             entry.dateWorked = element.target.value;
           }}
         />
         <StyledTextField
-          label={'Summary of what you did'}
+          label="Summary of what you did"
           multiline
           rows={4}
           onChange={(element) => {

@@ -9,10 +9,15 @@ import { IWorkHistory, ISkills, IProject, IContact } from 'models/data/';
 import Skills from 'components/create/Skills';
 import WorkHistory from 'components/create/WorkHistory';
 import Contact from 'components/create/Contact';
-//import {Skills, Introduction, WorkHistory, Contact, Project} from 'components/create';
 import Project from 'components/create/Project';
-import { stringify } from 'querystring';
 import Review from 'components/create/Review';
+const PAGE_TITLES = [
+  'Personal Information',
+  'Work History',
+  'Skills',
+  'Projects',
+  'Contact Information',
+];
 const CreatePortfolioPage: NextPage = () => {
   const portfolioClient = new PortfolioApiClient();
   const router = useRouter();
@@ -29,7 +34,6 @@ const CreatePortfolioPage: NextPage = () => {
   if (isSubmitting) {
     return <CircularProgress />;
   }
-  //
   const onSubmit = async () => {
     setIsSubmitting(true);
     const portfolio = await portfolioClient.put({
@@ -43,18 +47,11 @@ const CreatePortfolioPage: NextPage = () => {
         projects,
         contact,
       },
-      //
     });
     router.push(`/portfolio/${portfolio?.id}`);
     console.log(portfolio);
   };
-  const pageTitles = [
-    'Personal Information',
-    'Work History',
-    'Skills',
-    'Projects',
-    'Contact Information',
-  ];
+
   const PageDisplay = () => {
     if (page === 0) {
       return <Introduction />;
@@ -81,7 +78,7 @@ const CreatePortfolioPage: NextPage = () => {
       );
     }
   };
-  console.log(title);
+
   return (
     <CreatePortfolioContext.Provider
       value={{
@@ -104,13 +101,13 @@ const CreatePortfolioPage: NextPage = () => {
       }}
     >
       <div>
-        <Typography variant="h3">{pageTitles[page]}</Typography>
+        <Typography variant="h3">{PAGE_TITLES[page]}</Typography>
       </div>
       <div>{PageDisplay()}</div>
       <Button
         variant="outlined"
         color="secondary"
-        disabled={page == 0}
+        disabled={page === 0}
         onClick={() => {
           setPage((currPage) => currPage - 1);
         }}
@@ -120,7 +117,7 @@ const CreatePortfolioPage: NextPage = () => {
       <Button
         variant="outlined"
         color="primary"
-        disabled={page == 5}
+        disabled={page === PAGE_TITLES.length}
         onClick={() => {
           setPage((currPage) => currPage + 1);
         }}

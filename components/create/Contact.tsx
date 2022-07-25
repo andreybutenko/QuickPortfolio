@@ -42,7 +42,7 @@ const Contact = () => {
     <div>
       <Stack direction="column">
         <StyledTextField
-          label={'Email Address'}
+          label="Email Address"
           onChange={(element) => {
             contact.email = element.target.value;
           }}
@@ -50,13 +50,13 @@ const Contact = () => {
         <form ref={formRef}>
           <Stack direction="column">
             <StyledTextField
-              label={'Label'}
+              label="Label"
               onChange={(element) => {
                 draftLink.label = element.target.value;
               }}
             />
             <StyledTextField
-              label={'URL'}
+              label="URL"
               onChange={(element) => {
                 draftLink.url = element.target.value;
               }}

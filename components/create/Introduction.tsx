@@ -21,26 +21,26 @@ const Introduction = () => {
     <div>
       <Stack direction="column" spacing={1}>
         <StyledTextField
-          label={'Title your portfolio'}
+          label="Title your portfolio"
           onChange={(event) => {
             setTitle(event.target.value);
           }}
         />
         <StyledTextField
-          label={'Full Name'}
+          label="Full Name"
           onChange={(event) => {
             setName(event.target.value);
           }}
         />
 
         <StyledTextField
-          label={'Upload Picture'}
+          label="Upload Picture"
           onChange={(event) => {
             setHeadShot(event.target.value);
           }}
         />
         <StyledParagraphTextField
-          label={'About Yourself'}
+          label="About Yourself"
           multiline
           rows={4}
           onChange={(event) => {
