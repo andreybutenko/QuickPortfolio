@@ -1,8 +1,7 @@
-// import { Dispatch, SetStateAction, useContext } from 'react';
-import * as React from 'react';
 import { IWorkHistory, ISkills, IProject, IContact } from 'models/data/';
+import { createContext } from 'react';
 
-const CreatePortfolioContext = React.createContext({
+const CreatePortfolioContext = createContext({
   title: '',
   setTitle: (title: string) => {},
   name: '',

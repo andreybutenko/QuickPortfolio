@@ -23,6 +23,7 @@ const LinksEditor = (props: LinksEditorProps) => {
     [lastLink]
   );
 
+  const isValidUrl = (url: string) => url.startsWith('https://');
   const onAddLink = () => {
     setLinks([
       ...links,
@@ -59,18 +60,19 @@ const LinksEditor = (props: LinksEditorProps) => {
           return (
             <Stack direction="row" key={index}>
               <StyledTextField
-                label={'Label'}
+                label="Label"
                 onChange={(element) => {
                   onChangeLinkLabel(index, element.target.value);
                 }}
                 value={links[index].label}
               />
               <StyledTextField
-                label={'URL'}
+                label="URL (include https://)"
                 onChange={(element) => {
                   onChangeLinkUrl(index, element.target.value);
                 }}
                 value={links[index].url}
+                error={!isValidUrl(links[index].url)}
               />
               <StyledButton variant="text" onClick={() => onRemoveLink(index)}>
                 Remove Link

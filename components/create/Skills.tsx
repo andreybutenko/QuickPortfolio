@@ -4,24 +4,30 @@ import Stack from '@mui/material/Stack';
 import CreatePortfolioContext from 'components/create/CreatePorfolioContext';
 import { StyledTextField } from 'components/create/Styled';
 import { useState, useContext } from 'react';
+import { isUndefined } from 'utils';
 const Skills = () => {
   const { skills, setSkills } = useContext(CreatePortfolioContext);
-  const [techSkill, setTechSkill] = useState('');
-  const [softSkill, setSoftSkill] = useState('');
+  const [draftTechSkill, setDraftTechSkill] = useState('');
+  const [draftSoftSkill, setDraftSoftSkill] = useState('');
 
   return (
     <div>
       <StyledTextField
         label="Tech Skills"
-        value={techSkill}
+        value={draftTechSkill}
         onChange={(event) => {
-          setTechSkill(event.target.value);
+          setDraftTechSkill(event.target.value);
         }}
         onKeyPress={(e: any) => {
           if (e.key === 'Enter') {
-            skills.tech?.push(e.target.value);
-            setSkills({ ...skills });
-            setTechSkill('');
+            const newSkill = e.target.value;
+            setSkills({
+              ...skills,
+              tech: isUndefined(skills.tech)
+                ? [newSkill]
+                : [...(skills.tech as string[]), newSkill],
+            });
+            setDraftTechSkill('');
           }
         }}
       />
@@ -32,15 +38,20 @@ const Skills = () => {
       </Stack>
       <StyledTextField
         label="Soft Skills"
-        value={softSkill}
+        value={draftSoftSkill}
         onChange={(event) => {
-          setSoftSkill(event.target.value);
+          setDraftSoftSkill(event.target.value);
         }}
         onKeyPress={(e: any) => {
           if (e.key === 'Enter') {
-            skills.soft?.push(e.target.value);
-            setSkills({ ...skills });
-            setSoftSkill('');
+            const newSkill = e.target.value;
+            setSkills({
+              ...skills,
+              soft: isUndefined(skills.soft)
+                ? [newSkill]
+                : [...(skills.soft as string[]), newSkill],
+            });
+            setDraftSoftSkill('');
           }
         }}
       />
