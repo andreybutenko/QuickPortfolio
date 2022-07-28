@@ -1,7 +1,7 @@
 import * as React from 'react';
 import CreatePortfolioContext from 'components/create/CreatePorfolioContext';
-import { Stack, Button, Typography, Link } from '@mui/material';
-import { useContext, useState } from 'react';
+import { Stack, Typography, Link } from '@mui/material';
+import { useContext } from 'react';
 import { ILink } from 'models/data/';
 import EmailIcon from '@mui/icons-material/Email';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -11,10 +11,6 @@ import { StyledTextField } from 'components/create/Styled';
 import LinksEditor from './common/LinksEditor';
 const Contact = () => {
   const { contact, setContact } = useContext(CreatePortfolioContext);
-  const [email, setEmail] = useState('');
-  const onSubmit = () => {
-    setContact({ ...contact });
-  };
   const setLinks = (links: ILink[]) => {
     setContact({
       ...contact,
@@ -39,18 +35,13 @@ const Contact = () => {
       <Stack direction="column">
         <StyledTextField
           label="Email Address"
-          value={email}
-          onChange={(event) => {
-            setEmail(event.target.value);
+          onChange={(element) => {
+            setContact({
+              ...contact,
+              email: element.target.value,
+            });
           }}
-          onKeyPress={(element: any) => {
-            if (element.key === 'Enter') {
-              setContact({
-                ...contact,
-                email: element.target.value,
-              });
-            }
-          }}
+          value={contact.email}
         />
         <LinksEditor links={contact.links || []} setLinks={setLinks} />
       </Stack>
@@ -87,9 +78,6 @@ const Contact = () => {
           </div>
         </Stack>
       ))}
-      <Button variant="outlined" onClick={onSubmit}>
-        Review Your Information
-      </Button>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { Button, CircularProgress, Typography, Grid } from '@mui/material';
+import { Button, CircularProgress, Typography } from '@mui/material';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
@@ -49,7 +49,6 @@ const CreatePortfolioPage: NextPage = () => {
       },
     });
     router.push(`/portfolio/${portfolio?.id}`);
-    console.log(portfolio);
   };
 
   const PageDisplay = () => {

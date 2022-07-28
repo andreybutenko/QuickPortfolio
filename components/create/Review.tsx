@@ -5,24 +5,28 @@ import CreatePortfolioContext from 'components/create/CreatePorfolioContext';
 import { Typography } from '@mui/material';
 import { useContext } from 'react';
 import { Divider } from '@mui/material';
+import { IPortfolio } from 'models/data/IPortfolio';
 
 const Review = () => {
   const { title, name, headshot, about, work, skills, projects, contact } =
     useContext(CreatePortfolioContext);
+  const portfolio = {
+    content: { title, name, headshot, about, work, skills, projects, contact },
+  } as IPortfolio;
   return (
     <div>
       <Typography variant="h3">Personal Information</Typography>
       <Divider sx={{ borderBottomWidth: 2 }} />
       <Stack direction="column">
-        <Typography>Title: {title}</Typography>
-        <Typography>Name: {name}</Typography>
-        <Typography>Photo: {headshot}</Typography>
-        <Typography>Summary: {about}</Typography>
+        <Typography>Title: {portfolio.content.title}</Typography>
+        <Typography>Name: {portfolio.content.name}</Typography>
+        <Typography>Photo: {portfolio.content.headshot}</Typography>
+        <Typography>Summary: {portfolio.content.about}</Typography>
       </Stack>
       <Typography variant="h3">Work History</Typography>
       <Divider sx={{ borderBottomWidth: 2 }} />
       <Stack direction="column">
-        {work?.map((job, index: number) => (
+        {portfolio.content.work?.map((job, index: number) => (
           <Stack key={index} spacing={1} sx={{ paddingBottom: 2 }}>
             <Typography>Position: {job.position}</Typography>
             <Typography>Company: {job.company}</Typography>
@@ -34,17 +38,17 @@ const Review = () => {
       <Typography variant="h3">Skills</Typography>
       <Divider sx={{ borderBottomWidth: 2 }} />
       <Typography>Tech Skills</Typography>
-      {skills.tech?.map((tech, index: number) => (
+      {portfolio.content.skills.tech?.map((tech, index: number) => (
         <Chip key={index} label={tech} />
       ))}
 
       <Typography paddingTop={2}>Soft Skills</Typography>
-      {skills.soft?.map((soft, index: number) => (
+      {portfolio.content.skills.soft?.map((soft, index: number) => (
         <Chip key={index} label={soft} />
       ))}
       <Typography variant="h3">Projects</Typography>
       <Divider sx={{ borderBottomWidth: 2 }} />
-      {projects?.map((project, index: number) => (
+      {portfolio.content.projects?.map((project, index: number) => (
         <Stack key={index} spacing={1} sx={{ paddingBottom: 2 }}>
           <Typography>Title: {project.title}</Typography>
           <Typography>Picture: {project.picture}</Typography>
@@ -60,8 +64,8 @@ const Review = () => {
       <Typography variant="h3">Contact Information</Typography>
       <Divider sx={{ borderBottomWidth: 2 }} />
       <Stack direction="column">
-        <Typography>Email: {contact.email}</Typography>
-        {contact.links?.map((link, index: number) => (
+        <Typography>Email: {portfolio.content.contact.email}</Typography>
+        {portfolio.content.contact.links?.map((link, index: number) => (
           <Typography key={index}>
             {link.label}: {link.url}
           </Typography>

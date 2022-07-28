@@ -7,8 +7,6 @@ import { StyledTextField, StyledButton } from 'components/create/Styled';
 import LinksEditor from './common/LinksEditor';
 
 const Project = () => {
-  // useState gives you more control over the data being input/displayed
-  // and is more idiomatic for React compared to how this was previously implemented
   const [draftEntry, setDraftEntry] = React.useState<IProject>({
     title: '',
     picture: '',
