@@ -23,6 +23,8 @@ const LinksEditor = (props: LinksEditorProps) => {
     [lastLink]
   );
 
+  const isValidUrl = (url: string) => url.startsWith('https://');
+
   const onAddLink = () => {
     setLinks([
       ...links,
@@ -71,6 +73,7 @@ const LinksEditor = (props: LinksEditorProps) => {
                   onChangeLinkUrl(index, element.target.value);
                 }}
                 value={links[index].url}
+                error={!isValidUrl(links[index].url)}
               />
               <StyledButton variant="text" onClick={() => onRemoveLink(index)}>
                 Remove Link
