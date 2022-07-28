@@ -8,28 +8,24 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LanguageIcon from '@mui/icons-material/Language';
 import { StyledTextField } from 'components/create/Styled';
+import LinksEditor from './common/LinksEditor';
 const Contact = () => {
-  const formRef = useRef() as RefObject<HTMLFormElement>;
-  const draftLink: ILink = {
-    label: '',
-    url: '',
-  };
   const { contact, setContact } = useContext(CreatePortfolioContext);
-  const onAddLink = () => {
-    contact.links?.push(draftLink);
-
-    setContact({ ...contact });
-    formRef.current?.reset();
-  };
   const onSubmit = () => {
     setContact({ ...contact });
   };
+  const setLinks = (links: ILink[]) => {
+    setContact({
+      ...contact,
+      links,
+    });
+  };
   const selectLinkIcon = (link: ILink) => {
-    switch (true) {
-      case link.url.includes('linkedin.com'):
+    switch (link.label.toLowerCase()) {
+      case 'linkedin':
         link.label = 'LinkedIn';
         return <LinkedInIcon />;
-      case link.url.includes('github.com'):
+      case 'github':
         link.label = 'GitHub';
         return <GitHubIcon />;
 
@@ -37,36 +33,25 @@ const Contact = () => {
         return <LanguageIcon />;
     }
   };
-
+  const openInNewTab = (url: string | URL | undefined) => {
+    const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+    if (newWindow) newWindow.opener = null;
+  };
   return (
     <div>
       <Stack direction="column">
         <StyledTextField
-          label="Email Address"
+          label={'Email Address'}
           onChange={(element) => {
-            contact.email = element.target.value;
+            setContact({
+              ...contact,
+              email: element.target.value,
+            });
           }}
+          value={contact.email}
         />
-        <form ref={formRef}>
-          <Stack direction="column">
-            <StyledTextField
-              label="Label"
-              onChange={(element) => {
-                draftLink.label = element.target.value;
-              }}
-            />
-            <StyledTextField
-              label="URL"
-              onChange={(element) => {
-                draftLink.url = element.target.value;
-              }}
-            />
-          </Stack>
-        </form>
+        <LinksEditor links={contact.links || []} setLinks={setLinks} />
       </Stack>
-      <Button variant="outlined" onClick={onAddLink}>
-        Add Link
-      </Button>
       <div
         style={{
           display: 'flex',
@@ -92,7 +77,7 @@ const Contact = () => {
             {selectLinkIcon(link)}
             <span>
               <Typography>
-                <Link href={link.url} target="_blank" rel="noreferrer noopener">
+                <Link href="#" onClick={() => openInNewTab(link.url)}>
                   {link.label}
                 </Link>
               </Typography>
