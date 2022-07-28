@@ -1,7 +1,7 @@
 import * as React from 'react';
 import CreatePortfolioContext from 'components/create/CreatePorfolioContext';
 import { Stack, Typography } from '@mui/material';
-import { useContext, useRef, RefObject } from 'react';
+import { useContext } from 'react';
 import { IProject, ILink } from 'models/data/';
 import { StyledTextField, StyledButton } from 'components/create/Styled';
 import LinksEditor from './common/LinksEditor';
@@ -35,7 +35,7 @@ const Project = () => {
     <form>
       <Stack direction="column" spacing={1}>
         <StyledTextField
-          label={'Title'}
+          label="Title"
           onChange={(element) => {
             setDraftEntry({
               ...draftEntry,
@@ -45,7 +45,7 @@ const Project = () => {
           value={draftEntry.title}
         />
         <StyledTextField
-          label={'Picture'}
+          label="Picture"
           onChange={(element) => {
             setDraftEntry({
               ...draftEntry,
@@ -55,7 +55,7 @@ const Project = () => {
           value={draftEntry.picture}
         />
         <StyledTextField
-          label={'Summary'}
+          label="Summary"
           multiline
           rows={4}
           onChange={(element) => {

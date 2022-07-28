@@ -1,7 +1,7 @@
 import * as React from 'react';
 import CreatePortfolioContext from 'components/create/CreatePorfolioContext';
 import { Stack, Button, Typography, Link } from '@mui/material';
-import { useContext, useRef, RefObject } from 'react';
+import { useContext, useState } from 'react';
 import { ILink } from 'models/data/';
 import EmailIcon from '@mui/icons-material/Email';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -11,6 +11,7 @@ import { StyledTextField } from 'components/create/Styled';
 import LinksEditor from './common/LinksEditor';
 const Contact = () => {
   const { contact, setContact } = useContext(CreatePortfolioContext);
+  const [email, setEmail] = useState('');
   const onSubmit = () => {
     setContact({ ...contact });
   };
@@ -21,11 +22,11 @@ const Contact = () => {
     });
   };
   const selectLinkIcon = (link: ILink) => {
-    switch (link.label.toLowerCase()) {
-      case 'linkedin':
+    switch (true) {
+      case link.url.includes('linkedin.com'):
         link.label = 'LinkedIn';
         return <LinkedInIcon />;
-      case 'github':
+      case link.url.includes('github.com'):
         link.label = 'GitHub';
         return <GitHubIcon />;
 
@@ -33,22 +34,23 @@ const Contact = () => {
         return <LanguageIcon />;
     }
   };
-  const openInNewTab = (url: string | URL | undefined) => {
-    const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
-    if (newWindow) newWindow.opener = null;
-  };
   return (
     <div>
       <Stack direction="column">
         <StyledTextField
-          label={'Email Address'}
-          onChange={(element) => {
-            setContact({
-              ...contact,
-              email: element.target.value,
-            });
+          label="Email Address"
+          value={email}
+          onChange={(event) => {
+            setEmail(event.target.value);
           }}
-          value={contact.email}
+          onKeyPress={(element: any) => {
+            if (element.key === 'Enter') {
+              setContact({
+                ...contact,
+                email: element.target.value,
+              });
+            }
+          }}
         />
         <LinksEditor links={contact.links || []} setLinks={setLinks} />
       </Stack>
@@ -77,7 +79,7 @@ const Contact = () => {
             {selectLinkIcon(link)}
             <span>
               <Typography>
-                <Link href="#" onClick={() => openInNewTab(link.url)}>
+                <Link href={link.url} target="_blank" rel="noreferrer noopener">
                   {link.label}
                 </Link>
               </Typography>
