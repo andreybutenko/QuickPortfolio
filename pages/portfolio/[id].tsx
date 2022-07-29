@@ -1,4 +1,5 @@
-import { CircularProgress, Typography } from '@mui/material';
+import { CircularProgress } from '@mui/material';
+import PortfolioView from 'components/view/PortfolioView';
 import { IPortfolio } from 'models/data';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
@@ -23,17 +24,7 @@ const PortfolioDetailPage: NextPage = () => {
     return <CircularProgress />;
   }
 
-  return (
-    <div>
-      <Typography variant="h1">{portfolio.content.title}</Typography>
-      <Typography variant="subtitle1">
-        Created {portfolio.meta.createTime}
-      </Typography>
-      <Typography variant="subtitle1">
-        Last modified {portfolio.meta.modifyTime}
-      </Typography>
-    </div>
-  );
+  return <PortfolioView portfolio={portfolio} />;
 };
 
 export default PortfolioDetailPage;
