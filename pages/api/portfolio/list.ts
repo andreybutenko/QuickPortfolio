@@ -20,7 +20,9 @@ export default async function handler(
 
   try {
     const portfolioClient = new PortfolioDbClient();
-    const { portfolios, paginationToken } = await portfolioClient.list();
+    const { portfolios, paginationToken } = await portfolioClient.list(
+      req.query['paginationToken'] as string | undefined
+    );
 
     return res.status(200).json({ portfolios, paginationToken });
   } catch (err) {

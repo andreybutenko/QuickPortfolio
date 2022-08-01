@@ -1,6 +1,6 @@
 import { IPortfolioClient } from 'models/clients';
 import { IPortfolio } from 'models/data';
-import { constants } from 'utils';
+import { constants, isUndefined } from 'utils';
 
 /** Client to interact with portfolio API */
 export class PortfolioApiClient implements IPortfolioClient {
@@ -14,9 +14,10 @@ export class PortfolioApiClient implements IPortfolioClient {
 
   /** List portfolios */
   async list(paginationToken?: string) {
-    const response = await fetch(
-      `/api/portfolio/list?paginationToken=${paginationToken}`
-    );
+    const queryParams = !isUndefined(paginationToken)
+      ? `?paginationToken=${paginationToken}`
+      : '';
+    const response = await fetch(`/api/portfolio/list${queryParams}`);
     const json = await response.json();
 
     return json as {
