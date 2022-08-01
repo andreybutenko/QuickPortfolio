@@ -120,7 +120,7 @@ function unmarshalPortfolio(
           label: link?.M?.label?.S || '',
           url: link?.M?.url?.S || '',
         })) as PortfolioDefinitions.ILink[],
-        email: portfolio?.content?.M?.contact?.M?.email || '',
+        email: portfolio?.content?.M?.contact?.M?.email?.S || '',
       } as PortfolioDefinitions.IContact,
     },
   };
