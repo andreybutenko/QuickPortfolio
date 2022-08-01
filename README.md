@@ -53,6 +53,16 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+# Testing
+
+## Run E2E Tests
+
+Run end-to-end tests with Cypress:
+
+```bash
+npm run cypress
+```
+
 # Technical Architecture
 
 ## Clients
