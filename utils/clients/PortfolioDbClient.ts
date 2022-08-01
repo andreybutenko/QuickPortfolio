@@ -35,17 +35,23 @@ export class PortfolioDbClient implements IPortfolioClient {
 
   /** List portfolios */
   async list(paginationToken?: string) {
-    // TODO handle pagination
-
     const scanData = await this.ddbClient
       .scan({
         TableName: DynamoDbTable.PORTFOLIO_DEV,
+        Limit: 10,
+        ExclusiveStartKey: !isUndefined(paginationToken)
+          ? {
+              id: {
+                S: paginationToken,
+              },
+            }
+          : undefined,
       })
       .promise();
 
     return {
       portfolios: unmarshalPortfolios(scanData.Items),
-      paginationToken: undefined,
+      paginationToken: scanData.LastEvaluatedKey?.id?.S,
     };
   }
 

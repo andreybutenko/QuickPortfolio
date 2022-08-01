@@ -53,6 +53,12 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Run Tests
+
+```bash
+npm run test
+```
+
 # Technical Architecture
 
 ## Clients
