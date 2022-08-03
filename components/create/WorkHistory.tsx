@@ -1,6 +1,6 @@
 import * as React from 'react';
 import CreatePortfolioContext from 'components/create/CreatePorfolioContext';
-import { Stack } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import { useContext, useState } from 'react';
 import { StyledTextField, StyledButton } from 'components/create/Styled';
 import { IWorkHistory } from 'models/data/';
@@ -68,6 +68,12 @@ const WorkHistory = () => {
       <StyledButton variant="outlined" onClick={onSubmit}>
         Add Work History
       </StyledButton>
+      <Typography>Your Work History</Typography>
+      <ul>
+        {work.map((job, index) => (
+          <li key={index}>{job.position}</li>
+        ))}
+      </ul>
     </Stack>
   );
 };

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
-import { Typography, Avatar, Divider, Grid } from '@mui/material';
+import { Typography, Avatar, Divider, Grid, Button } from '@mui/material';
+import { StyledTextField, StyledButton } from 'components/create/Styled';
 
 import { IPortfolio } from 'models/data/IPortfolio';
 
@@ -34,13 +35,17 @@ const ProjectsView = (props: ProjectsViewProps) => {
               </Stack>
             </Grid>
           </Grid>
-          {/* <Typography>Title: {project.title}</Typography>
-          <Typography>Picture: {project.picture}</Typography>
-          <Typography>Summary: {project.summary}</Typography> */}
           {project.links?.map((link, index: number) => (
-            <Stack key={index}>
-              <Typography>{link.label}</Typography>
-              <Typography>{link.url}</Typography>
+            <Stack direction="row" key={index}>
+              <Button
+                variant="contained"
+                href={link.url}
+                target="_blank"
+                color="secondary"
+                style={{ width: 150 }}
+              >
+                {link.label}
+              </Button>
             </Stack>
           ))}
         </Stack>
