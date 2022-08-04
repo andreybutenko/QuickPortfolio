@@ -12,24 +12,30 @@ const IntroductionView = (props: IntroductionViewProps) => {
 
   return (
     <div>
-      <Grid sx={{ flexGrow: 1 }} container>
-        <Grid item>
-          <Avatar
-            variant="rounded"
-            alt={portfolio.content.name}
-            src={portfolio.content.headshot}
-            sx={{ width: 150, height: 150 }}
-          />
-        </Grid>
-        <Grid item padding={1}>
-          <Stack direction="column">
+      <Grid sx={{ flexGrow: 1 }} container direction="row">
+        <Stack direction="row">
+          <Grid item>
+            <Avatar
+              variant="rounded"
+              alt={portfolio.content.name}
+              src={portfolio.content.headshot}
+              sx={{
+                width: 300,
+                height: 300,
+              }}
+            />
+          </Grid>
+
+          <Grid item padding={1}>
             <Typography variant="h3">{portfolio.content.title}</Typography>
-            <Typography>{portfolio.content.name}</Typography>
+            <Typography style={{ fontWeight: 'bold' }}>
+              {portfolio.content.name}
+            </Typography>
             <Typography>{portfolio.content.about}</Typography>
-          </Stack>
-        </Grid>
+          </Grid>
+          <Divider sx={{ paddingBottom: 5, borderBottom: 0.5 }} />
+        </Stack>
       </Grid>
-      <Divider sx={{ padding: 1 }} />
     </div>
   );
 };

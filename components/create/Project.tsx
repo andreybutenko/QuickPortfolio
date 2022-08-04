@@ -69,11 +69,13 @@ const Project = () => {
           Add Project
         </StyledButton>
         <Typography>Your projects</Typography>
-        <ul>
-          {projects.map((project, index) => (
-            <li key={index}>{project.title}</li>
-          ))}
-        </ul>
+        <Typography>
+          <ul>
+            {projects.map((project, index) => (
+              <li key={index}>{project.title}</li>
+            ))}
+          </ul>
+        </Typography>
       </Stack>
     </form>
   );

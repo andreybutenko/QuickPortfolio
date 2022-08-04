@@ -9,6 +9,19 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LanguageIcon from '@mui/icons-material/Language';
 import { StyledTextField } from 'components/create/Styled';
 import LinksEditor from './common/LinksEditor';
+export const selectLinkIcon = (link: ILink) => {
+  switch (true) {
+    case link.url.includes('linkedin.com'):
+      link.label = 'LinkedIn';
+      return <LinkedInIcon sx={{ fontSize: 60 }} />;
+    case link.url.includes('github.com'):
+      link.label = 'GitHub';
+      return <GitHubIcon sx={{ fontSize: 60 }} />;
+
+    default:
+      return <LanguageIcon sx={{ fontSize: 60 }} />;
+  }
+};
 const Contact = () => {
   const { contact, setContact } = useContext(CreatePortfolioContext);
   const setLinks = (links: ILink[]) => {
@@ -16,19 +29,6 @@ const Contact = () => {
       ...contact,
       links,
     });
-  };
-  const selectLinkIcon = (link: ILink) => {
-    switch (true) {
-      case link.url.includes('linkedin.com'):
-        link.label = 'LinkedIn';
-        return <LinkedInIcon />;
-      case link.url.includes('github.com'):
-        link.label = 'GitHub';
-        return <GitHubIcon />;
-
-      default:
-        return <LanguageIcon />;
-    }
   };
   return (
     <div>

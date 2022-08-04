@@ -5,6 +5,8 @@ import SkillsView from 'components/view/SkillsView';
 import WorkHistoryView from './WorkHistoryView';
 import ContactView from './ContactView';
 import ProjectsView from './ProjectsView';
+import NavBarView from './NavBarView';
+import { Grid, Paper } from '@mui/material';
 
 type PortfolioViewProps = {
   portfolio: IPortfolio;
@@ -14,13 +16,26 @@ const PortfolioView = (props: PortfolioViewProps) => {
   const { portfolio } = props;
 
   return (
-    <div>
-      <IntroductionView portfolio={portfolio} />
-      <WorkHistoryView portfolio={portfolio} />
-      {/* <SkillsView portfolio={portfolio} /> */}
-      <ProjectsView portfolio={portfolio} />
-      <ContactView portfolio={portfolio} />
-    </div>
+    <Grid>
+      <NavBarView portfolio={portfolio} />
+      <Grid marginRight={3} marginLeft={3} style={{ padding: '2em' }}>
+        <Paper
+          elevation={24}
+          style={{
+            padding: '2em',
+            backgroundColor: 'rgba(255, 255,255, 0.6)',
+          }}
+        >
+          <Grid item marginRight={3} marginLeft={3}>
+            <IntroductionView portfolio={portfolio} />
+            <WorkHistoryView portfolio={portfolio} />
+            <SkillsView portfolio={portfolio} />
+            <ProjectsView portfolio={portfolio} />
+            <ContactView portfolio={portfolio} />
+          </Grid>
+        </Paper>
+      </Grid>
+    </Grid>
   );
 };
 export default PortfolioView;

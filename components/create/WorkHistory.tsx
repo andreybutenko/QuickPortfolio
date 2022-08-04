@@ -69,11 +69,13 @@ const WorkHistory = () => {
         Add Work History
       </StyledButton>
       <Typography>Your Work History</Typography>
-      <ul>
-        {work.map((job, index) => (
-          <li key={index}>{job.position}</li>
-        ))}
-      </ul>
+      <Typography>
+        <ul>
+          {work.map((job, index) => (
+            <li key={index}>{job.position}</li>
+          ))}
+        </ul>
+      </Typography>
     </Stack>
   );
 };

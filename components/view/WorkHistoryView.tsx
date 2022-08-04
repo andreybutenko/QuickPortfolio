@@ -18,15 +18,16 @@ const WorkHistoryView = (props: WorkHistoryViewProps) => {
   return (
     <div>
       <Typography variant="h3">Work History</Typography>
-      <Divider sx={{ borderBottomWidth: 2 }} />
-      <Card
-        sx={{
-          borderRadius: 7,
-          marginTop: 3,
-        }}
-      >
-        <CardContent>
-          {portfolio.content.work?.map((job, index: number) => (
+
+      {portfolio.content.work?.map((job, index: number) => (
+        <Card
+          sx={{
+            borderRadius: 7,
+            marginTop: 3,
+          }}
+          key={index}
+        >
+          <CardContent>
             <Grid item xs={10} key={index}>
               <Typography variant="h4" fontWeight={600}>
                 {job.position}
@@ -34,14 +35,15 @@ const WorkHistoryView = (props: WorkHistoryViewProps) => {
               <Typography variant="body1">
                 {job.company}, {job.dateWorked}
               </Typography>
-              <ListItem sx={{ display: 'list-item' }}>
-                {job.description}
-              </ListItem>
-              <Divider sx={{ border: 0.25 }} />
+              <Typography>
+                <ListItem sx={{ display: 'list-item' }}>
+                  {job.description}
+                </ListItem>
+              </Typography>
             </Grid>
-          ))}
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      ))}
     </div>
   );
 };
