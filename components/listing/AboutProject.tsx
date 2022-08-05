@@ -20,7 +20,13 @@ const AboutProject = () => {
               Mission Statement
             </Typography>
           </Grid>
-          <Grid item marginRight={60} marginLeft={60} color="black">
+          <Grid
+            item
+            marginRight="auto"
+            marginLeft="auto"
+            textAlign={'center'}
+            color="black"
+          >
             <Typography variant="h6">
               <p>
                 QuickPortfolio is a platform for early-career computing

@@ -1,7 +1,8 @@
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
-import { Avatar, Typography, Grid, Divider } from '@mui/material';
+import { Typography, Grid } from '@mui/material';
 import { IPortfolio } from 'models/data/IPortfolio';
+import { StyledAvatar, ViewSectionTypography } from 'components/create/Styled';
 
 type IntroductionViewProps = {
   portfolio: IPortfolio;
@@ -11,34 +12,27 @@ const IntroductionView = (props: IntroductionViewProps) => {
   const { portfolio } = props;
 
   return (
-    <div>
-      <Grid sx={{ flexGrow: 1 }} container direction="row">
-        <Stack direction="row">
-          <Grid item>
-            <Avatar
-              variant="rounded"
-              alt={portfolio.content.name}
-              src={portfolio.content.headshot}
-              sx={{
-                width: 300,
-                height: 300,
-              }}
-            />
-          </Grid>
+    <Grid sx={{ flexGrow: 1 }} container direction="row">
+      <Stack direction="row">
+        <Grid item>
+          <StyledAvatar
+            variant="rounded"
+            alt={`Profile picture of:${portfolio.content.name}`}
+            src={portfolio.content.headshot}
+          />
+        </Grid>
 
-          <Grid item padding={1}>
-            <Typography variant="h3" fontWeight={600}>
-              {portfolio.content.title}
-            </Typography>
-            <Typography style={{ fontWeight: 'bold' }}>
-              {portfolio.content.name}
-            </Typography>
-            <Typography>{portfolio.content.about}</Typography>
-          </Grid>
-          <Divider sx={{ paddingBottom: 5, borderBottom: 0.5 }} />
-        </Stack>
-      </Grid>
-    </div>
+        <Grid item padding={1}>
+          <ViewSectionTypography variant="h3">
+            {portfolio.content.title}
+          </ViewSectionTypography>
+          <Typography variant="subtitle1" fontWeight={'bold'}>
+            {portfolio.content.name}
+          </Typography>
+          <Typography>{portfolio.content.about}</Typography>
+        </Grid>
+      </Stack>
+    </Grid>
   );
 };
 export default IntroductionView;

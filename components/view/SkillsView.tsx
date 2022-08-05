@@ -21,14 +21,14 @@ const SkillsView = (props: SkillsViewProps) => {
         }}
       >
         <CardContent>
-          <Typography variant="subtitle1" fontWeight={600}>
+          <Typography variant="subtitle1" fontWeight={'bold'}>
             Tech Skills
           </Typography>
           {portfolio.content.skills.tech?.map((tech, index: number) => (
             <Chip key={index} label={tech} size={'medium'} />
           ))}
 
-          <Typography paddingTop={2} variant="subtitle1" fontWeight={600}>
+          <Typography paddingTop={2} variant="subtitle1" fontWeight={'bold'}>
             Soft Skills
           </Typography>
           {portfolio.content.skills.soft?.map((soft, index: number) => (

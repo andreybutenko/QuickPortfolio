@@ -1,7 +1,12 @@
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import { Typography, Avatar, Grid, Card, CardContent } from '@mui/material';
-import { ViewButton, ViewSectionTypography } from 'components/create/Styled';
+import {
+  ViewButton,
+  ViewSectionTypography,
+  StyledCard,
+  StyledCardContent,
+} from 'components/create/Styled';
 
 import { IPortfolio } from 'models/data/IPortfolio';
 
@@ -45,7 +50,7 @@ const ProjectsView = (props: ProjectsViewProps) => {
                       maxHeight: 300,
                     }}
                   />
-                  <Grid item></Grid>
+
                   <Grid item padding={1}>
                     <Stack direction="column">
                       <Typography variant="h3">{project.title}</Typography>

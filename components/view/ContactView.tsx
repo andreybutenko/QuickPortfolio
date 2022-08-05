@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import { IPortfolio } from 'models/data/IPortfolio';
 import { selectLinkIcon } from 'components/create/Contact';
-import { ViewSectionTypography } from 'components/create/Styled';
+import { ViewSectionTypography, StyledAvatar } from 'components/create/Styled';
 
 type ContactViewProps = {
   portfolio: IPortfolio;
@@ -31,14 +31,10 @@ const ContactView = (props: ContactViewProps) => {
         <CardContent>
           <Stack direction="row" spacing={{ xs: 4, sm: 4, md: 4 }}>
             <Grid>
-              <Avatar
+              <StyledAvatar
                 variant="rounded"
-                alt={portfolio.content.name}
+                alt={`Profile picture of:${portfolio.content.name}`}
                 src={portfolio.content.headshot}
-                sx={{
-                  width: 300,
-                  height: 300,
-                }}
               />
             </Grid>
             <Stack direction="column">

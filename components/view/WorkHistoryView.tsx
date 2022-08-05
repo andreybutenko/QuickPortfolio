@@ -22,10 +22,10 @@ const WorkHistoryView = (props: WorkHistoryViewProps) => {
         >
           <CardContent>
             <Grid item xs={10} key={index}>
-              <Typography variant="h4" fontWeight={600}>
+              <Typography variant="h4" fontWeight={'bold'}>
                 {job.position}
               </Typography>
-              <Typography variant="body1">
+              <Typography variant="subtitle1">
                 {job.company}, {job.dateWorked}
               </Typography>
               <Typography>

@@ -10,16 +10,14 @@ import LanguageIcon from '@mui/icons-material/Language';
 import { StyledTextField, StyledPaper } from 'components/create/Styled';
 import LinksEditor from './common/LinksEditor';
 export const selectLinkIcon = (link: ILink) => {
-  switch (true) {
-    case link.url.includes('linkedin.com'):
-      link.label = 'LinkedIn';
-      return <LinkedInIcon sx={{ fontSize: 60 }} />;
-    case link.url.includes('github.com'):
-      link.label = 'GitHub';
-      return <GitHubIcon sx={{ fontSize: 60 }} />;
-
-    default:
-      return <LanguageIcon sx={{ fontSize: 60 }} />;
+  if (link.url.includes('linkedin.com')) {
+    link.label = 'LinkedIn';
+    return <LinkedInIcon sx={{ fontSize: 60 }} />;
+  } else if (link.url.includes('github.com')) {
+    link.label = 'GitHub';
+    return <GitHubIcon sx={{ fontSize: 60 }} />;
+  } else {
+    return <LanguageIcon sx={{ fontSize: 60 }} />;
   }
 };
 const Contact = () => {

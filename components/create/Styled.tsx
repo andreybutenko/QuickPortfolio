@@ -1,5 +1,13 @@
 import { styled } from '@mui/system';
-import { Button, TextField, Paper, Typography } from '@mui/material';
+import {
+  Button,
+  TextField,
+  Paper,
+  Typography,
+  Card,
+  CardContent,
+  Avatar,
+} from '@mui/material';
 
 export const StyledTextField = styled(TextField, {
   name: 'StyledTextField',
@@ -40,4 +48,24 @@ export const ViewSectionTypography = styled(Typography, {
 })({
   paddingTop: 25,
   fontWeight: 'bold',
+});
+export const StyledCard = styled(Card, {
+  name: 'StyledCard',
+})({
+  borderRadius: 7,
+  marginTop: 3,
+});
+
+export const StyledCardContent = styled(CardContent, {
+  name: 'StyledCardContent',
+})({
+  borderRadius: 7,
+  marginTop: 3,
+});
+
+export const StyledAvatar = styled(Avatar, {
+  name: 'StyledAvatar',
+})({
+  width: 300,
+  height: 300,
 });
