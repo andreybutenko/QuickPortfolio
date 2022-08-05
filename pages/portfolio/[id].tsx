@@ -1,4 +1,4 @@
-import { CircularProgress } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
 import PortfolioView from 'components/view/PortfolioView';
 import { IPortfolio } from 'models/data';
 import type { NextPage } from 'next';
@@ -24,7 +24,11 @@ const PortfolioDetailPage: NextPage = () => {
     return <CircularProgress />;
   }
 
-  return <PortfolioView portfolio={portfolio} />;
+  return (
+    <div style={{ backgroundColor: 'rgba(216, 219, 215, 0.5)' }}>
+      <PortfolioView portfolio={portfolio} />
+    </div>
+  );
 };
 
 export default PortfolioDetailPage;

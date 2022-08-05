@@ -1,9 +1,12 @@
 import * as React from 'react';
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
-import { Typography } from '@mui/material';
-import { Divider } from '@mui/material';
 import { IPortfolio } from 'models/data/IPortfolio';
+import IntroductionView from 'components/view/IntroductionView';
+import SkillsView from 'components/view/SkillsView';
+import WorkHistoryView from './WorkHistoryView';
+import ContactView from './ContactView';
+import ProjectsView from './ProjectsView';
+import NavBarView from './NavBarView';
+import { Grid, Paper } from '@mui/material';
 
 type PortfolioViewProps = {
   portfolio: IPortfolio;
@@ -11,66 +14,44 @@ type PortfolioViewProps = {
 
 const PortfolioView = (props: PortfolioViewProps) => {
   const { portfolio } = props;
+  const PAGE_TITLES = [
+    'About',
+    'Work History',
+    'Projects',
+    'Skills',
+    'Contact',
+  ];
 
   return (
-    <div>
-      <Typography variant="h3">Personal Information</Typography>
-      <Divider sx={{ borderBottomWidth: 2 }} />
-      <Stack direction="column">
-        <Typography>Title: {portfolio.content.title}</Typography>
-        <Typography>Name: {portfolio.content.name}</Typography>
-        <Typography>Photo: {portfolio.content.headshot}</Typography>
-        <Typography>Summary: {portfolio.content.about}</Typography>
-      </Stack>
-      <Typography variant="h3">Work History</Typography>
-      <Divider sx={{ borderBottomWidth: 2 }} />
-      <Stack direction="column">
-        {portfolio.content.work?.map((job, index: number) => (
-          <Stack key={index} spacing={1} sx={{ paddingBottom: 2 }}>
-            <Typography>Position: {job.position}</Typography>
-            <Typography>Company: {job.company}</Typography>
-            <Typography>Dates Worked: {job.dateWorked}</Typography>
-            <Typography>What you did: {job.description}</Typography>
-          </Stack>
-        ))}
-      </Stack>
-      <Typography variant="h3">Skills</Typography>
-      <Divider sx={{ borderBottomWidth: 2 }} />
-      <Typography>Tech Skills</Typography>
-      {portfolio.content.skills.tech?.map((tech, index: number) => (
-        <Chip key={index} label={tech} />
-      ))}
-
-      <Typography paddingTop={2}>Soft Skills</Typography>
-      {portfolio.content.skills.soft?.map((soft, index: number) => (
-        <Chip key={index} label={soft} />
-      ))}
-      <Typography variant="h3">Projects</Typography>
-      <Divider sx={{ borderBottomWidth: 2 }} />
-      {portfolio.content.projects?.map((project, index: number) => (
-        <Stack key={index} spacing={1} sx={{ paddingBottom: 2 }}>
-          <Typography>Title: {project.title}</Typography>
-          <Typography>Picture: {project.picture}</Typography>
-          <Typography>Summary: {project.summary}</Typography>
-          {project.links?.map((link, index: number) => (
-            <Stack key={index}>
-              <Typography>{link.label}</Typography>
-              <Typography>{link.url}</Typography>
-            </Stack>
-          ))}
-        </Stack>
-      ))}
-      <Typography variant="h3">Contact Information</Typography>
-      <Divider sx={{ borderBottomWidth: 2 }} />
-      <Stack direction="column">
-        <Typography>Email: {portfolio.content.contact.email}</Typography>
-        {portfolio.content.contact.links?.map((link, index: number) => (
-          <Typography key={index}>
-            {link.label}: {link.url}
-          </Typography>
-        ))}
-      </Stack>
-    </div>
+    <Grid marginRight={3} marginLeft={3} style={{ padding: '2em' }}>
+      <NavBarView pageTitle={PAGE_TITLES} />
+      <Paper
+        elevation={24}
+        style={{
+          padding: '2em',
+          backgroundColor: 'rgba(255, 255,255, 0.6)',
+        }}
+        square={false}
+      >
+        <Grid item marginRight={3} marginLeft={3}>
+          <div id="About">
+            <IntroductionView portfolio={portfolio} />
+          </div>
+          <div id="Work History">
+            <WorkHistoryView portfolio={portfolio} />
+          </div>
+          <div id="Skills">
+            <SkillsView portfolio={portfolio} />
+          </div>
+          <div id="Projects">
+            <ProjectsView portfolio={portfolio} />
+          </div>
+          <div id="Contact">
+            <ContactView portfolio={portfolio} />
+          </div>
+        </Grid>
+      </Paper>
+    </Grid>
   );
 };
 export default PortfolioView;

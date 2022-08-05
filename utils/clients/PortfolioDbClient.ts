@@ -113,12 +113,12 @@ function unmarshalPortfolio(
         })) as PortfolioDefinitions.ILink[],
       })) as PortfolioDefinitions.IProject[],
       skills: {
-        tech: portfolio?.content?.M?.skills?.M?.tech?.L?.map((skill) => ({
-          skill: skill.S || '',
-        })),
-        soft: portfolio?.content?.M?.skills?.M?.soft?.L?.map((skill) => ({
-          skill: skill.S || '',
-        })),
+        tech: portfolio?.content?.M?.skills?.M?.tech?.L?.map(
+          (skill) => skill.S || ''
+        ),
+        soft: portfolio?.content?.M?.skills?.M?.soft?.L?.map(
+          (skill) => skill.S || ''
+        ),
       } as PortfolioDefinitions.ISkills,
       contact: {
         links: portfolio?.content?.M?.contact?.M?.link?.L?.map((link) => ({

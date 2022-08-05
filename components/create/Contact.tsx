@@ -7,8 +7,24 @@ import EmailIcon from '@mui/icons-material/Email';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LanguageIcon from '@mui/icons-material/Language';
-import { StyledTextField } from 'components/create/Styled';
+import {
+  StyledTextField,
+  StyledPaper,
+  CreateTitleTypography,
+} from 'components/create/Styled';
 import LinksEditor from './common/LinksEditor';
+import NavBarView from 'components/view/NavBarView';
+export const selectLinkIcon = (link: ILink) => {
+  if (link.url.includes('linkedin.com')) {
+    link.label = 'LinkedIn';
+    return <LinkedInIcon sx={{ fontSize: 60 }} />;
+  } else if (link.url.includes('github.com')) {
+    link.label = 'GitHub';
+    return <GitHubIcon sx={{ fontSize: 60 }} />;
+  } else {
+    return <LanguageIcon sx={{ fontSize: 60 }} />;
+  }
+};
 const Contact = () => {
   const { contact, setContact } = useContext(CreatePortfolioContext);
   const setLinks = (links: ILink[]) => {
@@ -17,49 +33,25 @@ const Contact = () => {
       links,
     });
   };
-  const selectLinkIcon = (link: ILink) => {
-    switch (true) {
-      case link.url.includes('linkedin.com'):
-        link.label = 'LinkedIn';
-        return <LinkedInIcon />;
-      case link.url.includes('github.com'):
-        link.label = 'GitHub';
-        return <GitHubIcon />;
-
-      default:
-        return <LanguageIcon />;
-    }
-  };
   return (
     <div>
-      <Stack direction="column">
-        <StyledTextField
-          label="Email Address"
-          onChange={(element) => {
-            setContact({
-              ...contact,
-              email: element.target.value,
-            });
-          }}
-          value={contact.email}
-        />
-        <LinksEditor links={contact.links || []} setLinks={setLinks} />
-      </Stack>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-        }}
-      >
-        <EmailIcon />
-        <span>
-          <Typography>{contact.email}</Typography>
-        </span>
-      </div>
-      <Typography>Your links</Typography>
-      {contact.links?.map((link, index: number) => (
-        <Stack key={index}>
+      <NavBarView pageTitle={[]} />
+      <StyledPaper elevation={12}>
+        <CreateTitleTypography variant="h3">Contact</CreateTitleTypography>
+        <div>
+          <Stack direction="column">
+            <StyledTextField
+              label="Email Address"
+              onChange={(element) => {
+                setContact({
+                  ...contact,
+                  email: element.target.value,
+                });
+              }}
+              value={contact.email}
+            />
+            <LinksEditor links={contact.links || []} setLinks={setLinks} />
+          </Stack>
           <div
             style={{
               display: 'flex',
@@ -67,17 +59,38 @@ const Contact = () => {
               flexWrap: 'wrap',
             }}
           >
-            {selectLinkIcon(link)}
+            <EmailIcon />
             <span>
-              <Typography>
-                <Link href={link.url} target="_blank" rel="noreferrer noopener">
-                  {link.label}
-                </Link>
-              </Typography>
+              <Typography>{contact.email}</Typography>
             </span>
           </div>
-        </Stack>
-      ))}
+          <Typography>Your links</Typography>
+          {contact.links?.map((link, index: number) => (
+            <Stack key={index}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  flexWrap: 'wrap',
+                }}
+              >
+                {selectLinkIcon(link)}
+                <span>
+                  <Typography>
+                    <Link
+                      href={link.url}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                    >
+                      {link.label}
+                    </Link>
+                  </Typography>
+                </span>
+              </div>
+            </Stack>
+          ))}
+        </div>
+      </StyledPaper>
     </div>
   );
 };
