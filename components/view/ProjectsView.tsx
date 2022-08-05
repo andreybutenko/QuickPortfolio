@@ -9,7 +9,12 @@ import {
   Card,
   CardContent,
 } from '@mui/material';
-import { StyledTextField, StyledButton } from 'components/create/Styled';
+import {
+  StyledTextField,
+  StyledButton,
+  ViewButton,
+  ViewSectionTypography,
+} from 'components/create/Styled';
 
 import { IPortfolio } from 'models/data/IPortfolio';
 
@@ -22,7 +27,7 @@ const ProjectsView = (props: ProjectsViewProps) => {
 
   return (
     <div>
-      <Typography variant="h3">Projects</Typography>
+      <ViewSectionTypography variant="h3">Projects</ViewSectionTypography>
 
       {portfolio.content.projects?.map((project, index: number) => (
         <Card
@@ -33,7 +38,12 @@ const ProjectsView = (props: ProjectsViewProps) => {
           key={index}
         >
           <CardContent>
-            <Stack key={index} spacing={1} sx={{ paddingBottom: 2 }}>
+            <Stack
+              key={index}
+              spacing={1}
+              sx={{ paddingBottom: 2 }}
+              direction="row"
+            >
               <Grid sx={{ flexGrow: 1 }} container direction="row">
                 <Stack direction="row">
                   <Avatar
@@ -57,21 +67,15 @@ const ProjectsView = (props: ProjectsViewProps) => {
                   </Grid>
                 </Stack>
               </Grid>
-              <Grid container direction="row" spacing={2} paddingTop={2}>
+              <Grid container direction="column" spacing={2} paddingTop={2}>
                 {project.links?.map((link, index: number) => (
-                  <Stack direction="row" key={index} spacing={2}>
-                    <Button
-                      variant="contained"
-                      href={link.url}
-                      target="_blank"
-                      style={{
-                        width: 150,
-                        backgroundColor: 'rgba(73, 97,175, 0.8)',
-                        color: 'white',
-                      }}
-                    >
-                      {link.label}
-                    </Button>
+                  <Stack
+                    direction="column"
+                    key={index}
+                    spacing={2}
+                    sx={{ paddingBottom: 2 }}
+                  >
+                    <ViewButton href={link.url}>{link.label}</ViewButton>
                   </Stack>
                 ))}
               </Grid>

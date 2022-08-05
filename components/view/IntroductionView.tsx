@@ -27,7 +27,9 @@ const IntroductionView = (props: IntroductionViewProps) => {
           </Grid>
 
           <Grid item padding={1}>
-            <Typography variant="h3">{portfolio.content.title}</Typography>
+            <Typography variant="h3" fontWeight={600}>
+              {portfolio.content.title}
+            </Typography>
             <Typography style={{ fontWeight: 'bold' }}>
               {portfolio.content.name}
             </Typography>

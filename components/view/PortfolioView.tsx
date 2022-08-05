@@ -7,6 +7,7 @@ import ContactView from './ContactView';
 import ProjectsView from './ProjectsView';
 import NavBarView from './NavBarView';
 import { Grid, Paper } from '@mui/material';
+import Scroll from 'react-scroll';
 
 type PortfolioViewProps = {
   portfolio: IPortfolio;
@@ -17,14 +18,15 @@ const PortfolioView = (props: PortfolioViewProps) => {
 
   return (
     <Grid>
-      <NavBarView portfolio={portfolio} />
       <Grid marginRight={3} marginLeft={3} style={{ padding: '2em' }}>
+        <NavBarView portfolio={portfolio} />
         <Paper
           elevation={24}
           style={{
             padding: '2em',
             backgroundColor: 'rgba(255, 255,255, 0.6)',
           }}
+          square={false}
         >
           <Grid item marginRight={3} marginLeft={3}>
             <IntroductionView portfolio={portfolio} />

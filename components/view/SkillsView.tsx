@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Typography, Divider, Card, CardContent } from '@mui/material';
 import { IPortfolio } from 'models/data/IPortfolio';
 import Chip from '@mui/material/Chip';
+import { ViewSectionTypography } from 'components/create/Styled';
 
 type SkillsViewProps = {
   portfolio: IPortfolio;
@@ -12,7 +13,7 @@ const SkillsView = (props: SkillsViewProps) => {
 
   return (
     <div>
-      <Typography variant="h3">Skills</Typography>
+      <ViewSectionTypography variant="h3">Skills</ViewSectionTypography>
       <Card
         sx={{
           borderRadius: 7,

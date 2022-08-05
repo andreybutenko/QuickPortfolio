@@ -21,37 +21,85 @@ type NavBarViewProps = {
 const NavBarView = (props: NavBarViewProps) => {
   const { portfolio } = props;
   const pages = ['About', 'Work History', 'Projects', 'Skills', 'Contact'];
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
-
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
 
   return (
+    // <AppBar
+    //   position="static"
+    //   sx={{
+    //     borderRadius: 7,
+    //     marginTop: 3,
+    //     marginBottom: 5,
+    //     backgroundColor: 'rgba(73, 97,175, 0.8)',
+    //     color: 'white',
+    //   }}
+    // >
+    //   <Container maxWidth="xl">
+    //     <Toolbar
+    //       disableGutters
+    //       sx={{
+    //         display: { xs: 'flex' },
+    //         flexDirection: 'row',
+    //         backgroundColor: 'rgba(73, 97,175, 0)',
+    //         justifyContent: 'space-between',
+    //       }}
+    //     >
+    //       {/* LOGO */}
+    //       <Typography
+    //         variant="h3"
+    //         noWrap
+    //         component="div"
+    //         color="white"
+    //         sx={{
+    //           mr: 2,
+    //           display: {
+    //             xs: 'none',
+    //             md: 'flex',
+    //             fontFamily: 'monospace',
+    //             fontWeight: 700,
+    //           },
+    //         }}
+    //       >
+    //         Quick Portfolio
+    //       </Typography>
+
+    //       {/* Issue */}
+    //       {/* ABOUT, PROJECTS, CONTACT - full screen */}
+    //       <Box
+    //         sx={{
+    //           display: { xs: 'none', md: 'flex' },
+    //         }}
+    //       >
+    //         {pages.map((page) => (
+    //           <Button
+    //             key={page}
+    //             sx={{ my: 2, color: 'black', display: 'block' }}
+    //           >
+    //             {page}
+    //           </Button>
+    //         ))}
+    //       </Box>
+    //     </Toolbar>
+    //   </Container>
+    // </AppBar>
     <AppBar
       position="static"
       sx={{
         borderRadius: 7,
         marginTop: 3,
+        marginBottom: 5,
         backgroundColor: 'rgba(73, 97,175, 0.8)',
         color: 'white',
       }}
     >
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar
+          disableGutters
+          sx={{
+            display: { xs: 'flex' },
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}
+        >
           <WorkHistoryOutlinedIcon
             sx={{ display: { xs: 'none', md: 'flex', color: 'white' }, mr: 1 }}
           />
@@ -99,7 +147,6 @@ const NavBarView = (props: NavBarViewProps) => {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}

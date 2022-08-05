@@ -1,4 +1,10 @@
-import { Button, CircularProgress, Typography } from '@mui/material';
+import {
+  Button,
+  CircularProgress,
+  Grid,
+  Paper,
+  Typography,
+} from '@mui/material';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
@@ -11,6 +17,7 @@ import WorkHistory from 'components/create/WorkHistory';
 import Contact from 'components/create/Contact';
 import Project from 'components/create/Project';
 import Review from 'components/create/Review';
+import { ViewButton } from 'components/create/Styled';
 const PAGE_TITLES = [
   'Personal Information',
   'Work History',
@@ -19,6 +26,13 @@ const PAGE_TITLES = [
   'Contact Information',
 ];
 const CreatePortfolioPage: NextPage = () => {
+  const paper = {
+    padding: 100,
+    height: '800px',
+    width: 500,
+    margin: 'auto',
+    fontFamily: 'Segoe UI Historic',
+  };
   const portfolioClient = new PortfolioApiClient();
   const router = useRouter();
   const [page, setPage] = useState(0);
@@ -66,13 +80,11 @@ const CreatePortfolioPage: NextPage = () => {
       return (
         <div>
           <Review />
-          <Button
-            variant="contained"
-            disabled={isSubmitting}
-            onClick={onSubmit}
-          >
-            {isSubmitting ? 'Submitting...' : 'Create'}
-          </Button>
+          <Grid container justifyContent={'center'}>
+            <ViewButton disabled={isSubmitting} onClick={onSubmit}>
+              {isSubmitting ? 'Submitting...' : 'Create'}
+            </ViewButton>
+          </Grid>
         </div>
       );
     }
@@ -99,30 +111,44 @@ const CreatePortfolioPage: NextPage = () => {
         setContact,
       }}
     >
-      <div>
+      <div
+        style={{
+          justifyContent: 'center',
+          alignContent: 'center',
+          alignItems: 'center',
+          display: 'flex',
+        }}
+      >
         <Typography variant="h3">{PAGE_TITLES[page]}</Typography>
       </div>
       <div>{PageDisplay()}</div>
-      <Button
-        variant="outlined"
-        color="secondary"
-        disabled={page === 0}
-        onClick={() => {
-          setPage((currPage) => currPage - 1);
-        }}
+      <Grid
+        container
+        justifyContent={'center'}
+        paddingTop={3}
+        paddingBottom={5}
       >
-        Prev
-      </Button>
-      <Button
-        variant="outlined"
-        color="primary"
-        disabled={page === PAGE_TITLES.length}
-        onClick={() => {
-          setPage((currPage) => currPage + 1);
-        }}
-      >
-        Next
-      </Button>
+        <Button
+          variant="outlined"
+          color="secondary"
+          disabled={page === 0}
+          onClick={() => {
+            setPage((currPage) => currPage - 1);
+          }}
+        >
+          Prev
+        </Button>
+        <Button
+          variant="outlined"
+          color="primary"
+          disabled={page === PAGE_TITLES.length}
+          onClick={() => {
+            setPage((currPage) => currPage + 1);
+          }}
+        >
+          Next
+        </Button>
+      </Grid>
     </CreatePortfolioContext.Provider>
   );
 };

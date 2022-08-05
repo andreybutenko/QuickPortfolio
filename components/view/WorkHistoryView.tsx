@@ -9,6 +9,7 @@ import {
   Divider,
 } from '@mui/material';
 import { IPortfolio } from 'models/data/IPortfolio';
+import { ViewSectionTypography } from 'components/create/Styled';
 type WorkHistoryViewProps = {
   portfolio: IPortfolio;
 };
@@ -17,7 +18,7 @@ const WorkHistoryView = (props: WorkHistoryViewProps) => {
   const { portfolio } = props;
   return (
     <div>
-      <Typography variant="h3">Work History</Typography>
+      <ViewSectionTypography variant="h3">Work History</ViewSectionTypography>
 
       {portfolio.content.work?.map((job, index: number) => (
         <Card
