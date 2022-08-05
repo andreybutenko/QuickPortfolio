@@ -7,6 +7,7 @@ import {
   Card,
   CardContent,
   Avatar,
+  AppBar,
 } from '@mui/material';
 
 export const StyledTextField = styled(TextField, {
@@ -68,4 +69,29 @@ export const StyledAvatar = styled(Avatar, {
 })({
   width: 300,
   height: 300,
+});
+
+export const NavBarViewTypography = styled(Typography, {
+  name: 'NavBarViewTypography',
+})({
+  mr: 2,
+  xs: 'none',
+  md: 'flex',
+  fontWeight: 600,
+  letterSpacing: '.3rem',
+  color: 'white',
+  textDecoration: 'none',
+  component: 'a',
+  href: '/',
+});
+
+export const StyledAppBar = styled(AppBar, {
+  name: 'StyledAppBar',
+})({
+  position: 'static',
+  borderRadius: 5,
+  marginTop: 3,
+  marginBottom: 5,
+  backgroundColor: 'rgba(73, 97,175, 0.8)',
+  color: 'white',
 });

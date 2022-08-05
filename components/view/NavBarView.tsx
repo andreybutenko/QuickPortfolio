@@ -6,6 +6,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
+import { NavBarViewTypography, StyledAppBar } from 'components/create/Styled';
 type NavBarViewProps = {
   portfolio: IPortfolio;
 };
@@ -17,7 +18,7 @@ const NavBarView = (props: NavBarViewProps) => {
     <AppBar
       position="static"
       sx={{
-        borderRadius: 7,
+        borderRadius: 5,
         marginTop: 3,
         marginBottom: 5,
         backgroundColor: 'rgba(73, 97,175, 0.8)',
@@ -52,24 +53,7 @@ const NavBarView = (props: NavBarViewProps) => {
           >
             QUICKPORTFOLIO
           </Typography>
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            QUICK PORTFOLIO
-          </Typography>
+
           <Box
             sx={{
               flexGrow: 1,

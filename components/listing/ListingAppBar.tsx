@@ -7,6 +7,7 @@ const ListingAppBar = () => {
       position="static"
       sx={{
         borderRadius: 5,
+        marginTop: 3,
         marginBottom: 5,
         backgroundColor: 'rgba(73, 97,175, 0.8)',
         color: 'white',
