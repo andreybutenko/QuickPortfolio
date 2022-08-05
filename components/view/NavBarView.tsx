@@ -12,6 +12,9 @@ type NavBarViewProps = {
 };
 
 const NavBarView = (props: NavBarViewProps) => {
+  function scrollTo(hash: string) {
+    location.hash = '#' + hash;
+  }
   return (
     <AppBar
       position="static"
@@ -62,6 +65,9 @@ const NavBarView = (props: NavBarViewProps) => {
               <Button
                 key={page}
                 sx={{ my: 2, color: 'white', display: 'block' }}
+                onClick={() => {
+                  scrollTo(page);
+                }}
               >
                 {page}
               </Button>

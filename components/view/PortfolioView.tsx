@@ -35,11 +35,21 @@ const PortfolioView = (props: PortfolioViewProps) => {
         square={false}
       >
         <Grid item marginRight={3} marginLeft={3}>
-          <IntroductionView portfolio={portfolio} />
-          <WorkHistoryView portfolio={portfolio} />
-          <SkillsView portfolio={portfolio} />
-          <ProjectsView portfolio={portfolio} />
-          <ContactView portfolio={portfolio} />
+          <div id="About">
+            <IntroductionView portfolio={portfolio} />
+          </div>
+          <div id="Work History">
+            <WorkHistoryView portfolio={portfolio} />
+          </div>
+          <div id="Skills">
+            <SkillsView portfolio={portfolio} />
+          </div>
+          <div id="Projects">
+            <ProjectsView portfolio={portfolio} />
+          </div>
+          <div id="Contact">
+            <ContactView portfolio={portfolio} />
+          </div>
         </Grid>
       </Paper>
     </Grid>
