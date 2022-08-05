@@ -10,14 +10,22 @@ import { Grid, Paper } from '@mui/material';
 
 type PortfolioViewProps = {
   portfolio: IPortfolio;
+  pageTitle: string[];
 };
 
 const PortfolioView = (props: PortfolioViewProps) => {
   const { portfolio } = props;
+  const PAGE_TITLES = [
+    'About',
+    'Work History',
+    'Projects',
+    'Skills',
+    'Contact',
+  ];
 
   return (
     <Grid marginRight={3} marginLeft={3} style={{ padding: '2em' }}>
-      <NavBarView portfolio={portfolio} />
+      <NavBarView pageTitle={PAGE_TITLES} />
       <Paper
         elevation={24}
         style={{

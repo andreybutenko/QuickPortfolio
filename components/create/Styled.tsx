@@ -62,6 +62,7 @@ export const StyledCardContent = styled(CardContent, {
 })({
   borderRadius: 7,
   marginTop: 3,
+  paddingTop: 10,
 });
 
 export const StyledAvatar = styled(Avatar, {

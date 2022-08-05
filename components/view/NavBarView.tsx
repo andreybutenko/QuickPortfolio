@@ -8,12 +8,10 @@ import Button from '@mui/material/Button';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 import { NavBarViewTypography, StyledAppBar } from 'components/create/Styled';
 type NavBarViewProps = {
-  portfolio: IPortfolio;
+  pageTitle: string[];
 };
 
 const NavBarView = (props: NavBarViewProps) => {
-  const pages = ['About', 'Work History', 'Projects', 'Skills', 'Contact'];
-
   return (
     <AppBar
       position="static"
@@ -60,7 +58,7 @@ const NavBarView = (props: NavBarViewProps) => {
               display: { xs: 'none', md: 'flex' },
             }}
           >
-            {pages.map((page) => (
+            {props.pageTitle.map((page) => (
               <Button
                 key={page}
                 sx={{ my: 2, color: 'white', display: 'block' }}

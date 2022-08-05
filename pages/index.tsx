@@ -14,9 +14,9 @@ import IntroductionView from 'components/view/IntroductionView';
 import { useState } from 'react';
 import { useEffectAsync } from 'utils';
 import { PortfolioApiClient } from 'utils/clients';
-import ListingAppBar from 'components/listing/ListingAppBar';
 import { ViewButton } from 'components/create/Styled';
 import AboutProject from 'components/listing/AboutProject';
+import NavBarView from 'components/view/NavBarView';
 
 const Home: NextPage = () => {
   const portfolioClient = new PortfolioApiClient();
@@ -31,7 +31,7 @@ const Home: NextPage = () => {
     <div>
       <Grid style={{ backgroundColor: 'rgba(216, 219, 215, 0.5)' }}>
         <Grid marginRight={3} marginLeft={3} style={{ padding: '2em' }}>
-          <ListingAppBar />
+          <NavBarView pageTitle={[]} />
           <AboutProject />
           <Paper
             elevation={12}

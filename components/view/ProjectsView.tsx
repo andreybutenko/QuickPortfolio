@@ -22,14 +22,8 @@ const ProjectsView = (props: ProjectsViewProps) => {
       <ViewSectionTypography variant="h3">Projects</ViewSectionTypography>
 
       {portfolio.content.projects?.map((project, index: number) => (
-        <Card
-          sx={{
-            borderRadius: 7,
-            marginTop: 3,
-          }}
-          key={index}
-        >
-          <CardContent>
+        <StyledCard key={index}>
+          <StyledCardContent>
             <Stack
               key={index}
               spacing={1}
@@ -72,8 +66,8 @@ const ProjectsView = (props: ProjectsViewProps) => {
                 ))}
               </Grid>
             </Stack>
-          </CardContent>
-        </Card>
+          </StyledCardContent>
+        </StyledCard>
       ))}
     </div>
   );
