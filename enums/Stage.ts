@@ -1,5 +1,6 @@
 /** Service environments */
 export enum Stage {
-  DEV = 'dev',
-  PROD = 'prod',
+  PRODUCTION = 'production',
+  PREVIEW = 'preview',
+  DEVELOPMENT = 'development',
 }
