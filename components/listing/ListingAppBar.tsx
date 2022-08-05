@@ -1,5 +1,5 @@
 import { AppBar, Container, Toolbar, Typography } from '@mui/material';
-import WorkHistoryOutlinedIcon from '@mui/icons-material/WorkHistoryOutlined';
+import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 
 const ListingAppBar = () => {
   return (
@@ -14,7 +14,7 @@ const ListingAppBar = () => {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <WorkHistoryOutlinedIcon
+          <WorkHistoryIcon
             sx={{
               display: { xs: 'none', md: 'flex', color: 'white' },
               mr: 1,
@@ -28,14 +28,13 @@ const ListingAppBar = () => {
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
+              fontWeight: 600,
               letterSpacing: '.3rem',
               color: 'white',
               textDecoration: 'none',
             }}
           >
-            QUICK PORTFOLIO
+            QUICKPORTFOLIO
           </Typography>
         </Toolbar>
       </Container>

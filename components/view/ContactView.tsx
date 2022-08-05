@@ -1,8 +1,5 @@
 import * as React from 'react';
 import EmailIcon from '@mui/icons-material/Email';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import LanguageIcon from '@mui/icons-material/Language';
 import Stack from '@mui/material/Stack';
 import {
   Typography,
@@ -12,7 +9,6 @@ import {
   Avatar,
   Grid,
 } from '@mui/material';
-import { Divider } from '@mui/material';
 import { IPortfolio } from 'models/data/IPortfolio';
 import { selectLinkIcon } from 'components/create/Contact';
 import { ViewSectionTypography } from 'components/create/Styled';

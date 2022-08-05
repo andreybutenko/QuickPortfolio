@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Typography, Divider, Card, CardContent } from '@mui/material';
+import { Typography, Card, CardContent } from '@mui/material';
 import { IPortfolio } from 'models/data/IPortfolio';
 import Chip from '@mui/material/Chip';
 import { ViewSectionTypography } from 'components/create/Styled';

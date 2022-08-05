@@ -1,10 +1,4 @@
-import {
-  Button,
-  CircularProgress,
-  Grid,
-  Paper,
-  Typography,
-} from '@mui/material';
+import { Button, CircularProgress, Grid, Typography } from '@mui/material';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
@@ -26,13 +20,6 @@ const PAGE_TITLES = [
   'Contact Information',
 ];
 const CreatePortfolioPage: NextPage = () => {
-  const paper = {
-    padding: 100,
-    height: '800px',
-    width: 500,
-    margin: 'auto',
-    fontFamily: 'Segoe UI Historic',
-  };
   const portfolioClient = new PortfolioApiClient();
   const router = useRouter();
   const [page, setPage] = useState(0);

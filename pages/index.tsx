@@ -1,13 +1,9 @@
 import {
   Alert,
-  AppBar,
-  Button,
   CardActions,
-  Container,
   Grid,
   Paper,
   Stack,
-  Toolbar,
   Typography,
 } from '@mui/material';
 import Card from '@mui/material/Card';
@@ -19,7 +15,7 @@ import { useState } from 'react';
 import { useEffectAsync } from 'utils';
 import { PortfolioApiClient } from 'utils/clients';
 import ListingAppBar from 'components/listing/ListingAppBar';
-import { ViewButton, ViewSectionTypography } from 'components/create/Styled';
+import { ViewButton } from 'components/create/Styled';
 import AboutProject from 'components/listing/AboutProject';
 
 const Home: NextPage = () => {

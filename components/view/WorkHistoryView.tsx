@@ -1,13 +1,5 @@
 import * as React from 'react';
-import Stack from '@mui/material/Stack';
-import {
-  Typography,
-  Card,
-  CardContent,
-  Grid,
-  ListItem,
-  Divider,
-} from '@mui/material';
+import { Typography, Card, CardContent, Grid, ListItem } from '@mui/material';
 import { IPortfolio } from 'models/data/IPortfolio';
 import { ViewSectionTypography } from 'components/create/Styled';
 type WorkHistoryViewProps = {

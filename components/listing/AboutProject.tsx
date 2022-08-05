@@ -1,25 +1,4 @@
-import {
-  Alert,
-  AppBar,
-  Button,
-  CardActions,
-  Container,
-  Grid,
-  Paper,
-  Stack,
-  Toolbar,
-  Typography,
-} from '@mui/material';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import { IPortfolio } from 'models/data';
-import type { NextPage } from 'next';
-import IntroductionView from 'components/view/IntroductionView';
-import { useState } from 'react';
-import { useEffectAsync } from 'utils';
-import { PortfolioApiClient } from 'utils/clients';
-import ListingAppBar from 'components/listing/ListingAppBar';
-import { ViewButton, ViewSectionTypography } from 'components/create/Styled';
+import { Grid, Paper, Typography } from '@mui/material';
 
 const AboutProject = () => {
   return (

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import CreatePortfolioContext from 'components/create/CreatePorfolioContext';
-import { Paper, Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import { useContext, useState } from 'react';
 import {
   StyledTextField,

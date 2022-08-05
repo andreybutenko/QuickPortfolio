@@ -7,7 +7,6 @@ import ContactView from './ContactView';
 import ProjectsView from './ProjectsView';
 import NavBarView from './NavBarView';
 import { Grid, Paper } from '@mui/material';
-import Scroll from 'react-scroll';
 
 type PortfolioViewProps = {
   portfolio: IPortfolio;
