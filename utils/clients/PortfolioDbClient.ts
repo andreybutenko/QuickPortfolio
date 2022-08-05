@@ -3,25 +3,30 @@ import {
   ItemList,
   PutItemInputAttributeMap,
 } from 'aws-sdk/clients/dynamodb';
-import { DynamoDbTable } from 'enums';
+import { DynamoDbTable, Stage } from 'enums';
 import { IPortfolioClient } from 'models/clients';
 import * as PortfolioDefinitions from 'models/data/IPortfolio';
 import { getDynamoDbClient } from 'utils/api';
-import { isUndefined } from 'utils';
+import { getStage, isUndefined } from 'utils';
 
 /** Client to interact with portfolio DynamoDB */
 export class PortfolioDbClient implements IPortfolioClient {
   ddbClient: AWS.DynamoDB;
+  tableName: DynamoDbTable;
 
   constructor() {
     this.ddbClient = getDynamoDbClient();
+    this.tableName =
+      getStage() === Stage.PRODUCTION
+        ? DynamoDbTable.PORTFOLIO_PROD
+        : DynamoDbTable.PORTFOLIO_DEV;
   }
 
   /** Get portfolio with an ID */
   async get(id: string) {
     const getData = await this.ddbClient
       .getItem({
-        TableName: DynamoDbTable.PORTFOLIO_DEV,
+        TableName: this.tableName,
         Key: {
           id: {
             S: id as string,
@@ -39,7 +44,7 @@ export class PortfolioDbClient implements IPortfolioClient {
 
     const scanData = await this.ddbClient
       .scan({
-        TableName: DynamoDbTable.PORTFOLIO_DEV,
+        TableName: this.tableName,
       })
       .promise();
 
@@ -53,7 +58,7 @@ export class PortfolioDbClient implements IPortfolioClient {
   async put(portfolio: PortfolioDefinitions.IPortfolio) {
     await this.ddbClient
       .putItem({
-        TableName: DynamoDbTable.PORTFOLIO_DEV,
+        TableName: this.tableName,
         Item: marshalPortfolio(portfolio),
       })
       .promise();
