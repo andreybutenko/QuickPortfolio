@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Typography, Card, CardContent, Grid, ListItem } from '@mui/material';
+import { Typography, CardContent, Grid, ListItem } from '@mui/material';
 import { IPortfolio } from 'models/data/IPortfolio';
-import { ViewSectionTypography } from 'components/create/Styled';
+import { StyledCard, ViewSectionTypography } from 'components/create/Styled';
 type WorkHistoryViewProps = {
   portfolio: IPortfolio;
 };
@@ -13,13 +13,7 @@ const WorkHistoryView = (props: WorkHistoryViewProps) => {
       <ViewSectionTypography variant="h3">Work History</ViewSectionTypography>
 
       {portfolio.content.work?.map((job, index: number) => (
-        <Card
-          sx={{
-            borderRadius: 7,
-            marginTop: 3,
-          }}
-          key={index}
-        >
+        <StyledCard key={index}>
           <CardContent>
             <Grid item xs={10} key={index}>
               <Typography variant="h4" fontWeight={'bold'}>
@@ -35,7 +29,7 @@ const WorkHistoryView = (props: WorkHistoryViewProps) => {
               </Typography>
             </Grid>
           </CardContent>
-        </Card>
+        </StyledCard>
       ))}
     </div>
   );

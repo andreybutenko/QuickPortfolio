@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Typography, Card, CardContent } from '@mui/material';
+import { Typography, CardContent } from '@mui/material';
 import { IPortfolio } from 'models/data/IPortfolio';
 import Chip from '@mui/material/Chip';
-import { ViewSectionTypography } from 'components/create/Styled';
+import { ViewSectionTypography, StyledCard } from 'components/create/Styled';
 
 type SkillsViewProps = {
   portfolio: IPortfolio;
@@ -14,12 +14,7 @@ const SkillsView = (props: SkillsViewProps) => {
   return (
     <div>
       <ViewSectionTypography variant="h3">Skills</ViewSectionTypography>
-      <Card
-        sx={{
-          borderRadius: 7,
-          marginTop: 3,
-        }}
-      >
+      <StyledCard>
         <CardContent>
           <Typography variant="subtitle1" fontWeight={'bold'}>
             Tech Skills
@@ -35,7 +30,7 @@ const SkillsView = (props: SkillsViewProps) => {
             <Chip key={index} label={soft} />
           ))}
         </CardContent>
-      </Card>
+      </StyledCard>
     </div>
   );
 };

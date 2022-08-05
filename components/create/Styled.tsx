@@ -5,7 +5,6 @@ import {
   Paper,
   Typography,
   Card,
-  CardContent,
   Avatar,
   AppBar,
 } from '@mui/material';
@@ -53,16 +52,8 @@ export const ViewSectionTypography = styled(Typography, {
 export const StyledCard = styled(Card, {
   name: 'StyledCard',
 })({
-  borderRadius: 7,
-  marginTop: 3,
-});
-
-export const StyledCardContent = styled(CardContent, {
-  name: 'StyledCardContent',
-})({
-  borderRadius: 7,
-  marginTop: 3,
-  paddingTop: 10,
+  borderRadius: 30,
+  marginTop: 25,
 });
 
 export const StyledAvatar = styled(Avatar, {
@@ -76,23 +67,25 @@ export const NavBarViewTypography = styled(Typography, {
   name: 'NavBarViewTypography',
 })({
   mr: 2,
-  xs: 'none',
-  md: 'flex',
   fontWeight: 600,
   letterSpacing: '.3rem',
   color: 'white',
   textDecoration: 'none',
-  component: 'a',
-  href: '/',
 });
 
 export const StyledAppBar = styled(AppBar, {
   name: 'StyledAppBar',
 })({
-  position: 'static',
-  borderRadius: 5,
-  marginTop: 3,
-  marginBottom: 5,
+  borderRadius: 15,
+  marginTop: 15,
+  marginBottom: 40,
   backgroundColor: 'rgba(73, 97,175, 0.8)',
   color: 'white',
+});
+
+export const CreateTitleTypography = styled(Typography, {
+  name: 'CreateTitleTypography',
+})({
+  textAlign: 'center',
+  paddingBottom: 30,
 });

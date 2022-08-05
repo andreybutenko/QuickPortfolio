@@ -4,9 +4,10 @@ import {
   StyledTextField,
   StyledParagraphTextField,
   StyledPaper,
+  CreateTitleTypography,
 } from 'components/create/Styled';
-
 import CreatePortfolioContext from 'components/create/CreatePorfolioContext';
+import NavBarView from 'components/view/NavBarView';
 const Introduction = () => {
   const {
     title,
@@ -19,8 +20,12 @@ const Introduction = () => {
     setAbout,
   } = useContext(CreatePortfolioContext);
   return (
-    <StyledPaper elevation={12}>
-      <div>
+    <div>
+      <NavBarView pageTitle={[]} />
+      <StyledPaper elevation={12}>
+        <CreateTitleTypography variant="h3">
+          Personal Information
+        </CreateTitleTypography>
         <Stack direction="column" spacing={1}>
           <StyledTextField
             label="Title your portfolio"
@@ -50,8 +55,8 @@ const Introduction = () => {
             }}
           />
         </Stack>
-      </div>
-    </StyledPaper>
+      </StyledPaper>
+    </div>
   );
 };
 export default Introduction;

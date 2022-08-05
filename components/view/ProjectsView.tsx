@@ -5,7 +5,6 @@ import {
   ViewButton,
   ViewSectionTypography,
   StyledCard,
-  StyledCardContent,
 } from 'components/create/Styled';
 
 import { IPortfolio } from 'models/data/IPortfolio';
@@ -23,7 +22,7 @@ const ProjectsView = (props: ProjectsViewProps) => {
 
       {portfolio.content.projects?.map((project, index: number) => (
         <StyledCard key={index}>
-          <StyledCardContent>
+          <CardContent>
             <Stack
               key={index}
               spacing={1}
@@ -66,7 +65,7 @@ const ProjectsView = (props: ProjectsViewProps) => {
                 ))}
               </Grid>
             </Stack>
-          </StyledCardContent>
+          </CardContent>
         </StyledCard>
       ))}
     </div>

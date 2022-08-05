@@ -1,4 +1,4 @@
-import { Button, CircularProgress, Grid, Typography } from '@mui/material';
+import { Button, CircularProgress, Grid } from '@mui/material';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
@@ -105,9 +105,7 @@ const CreatePortfolioPage: NextPage = () => {
           alignItems: 'center',
           display: 'flex',
         }}
-      >
-        <Typography variant="h3">{PAGE_TITLES[page]}</Typography>
-      </div>
+      ></div>
       <div>{PageDisplay()}</div>
       <Grid
         container

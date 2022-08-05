@@ -10,7 +10,6 @@ import { Grid, Paper } from '@mui/material';
 
 type PortfolioViewProps = {
   portfolio: IPortfolio;
-  pageTitle: string[];
 };
 
 const PortfolioView = (props: PortfolioViewProps) => {

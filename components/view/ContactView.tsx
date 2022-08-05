@@ -1,17 +1,14 @@
 import * as React from 'react';
 import EmailIcon from '@mui/icons-material/Email';
 import Stack from '@mui/material/Stack';
-import {
-  Typography,
-  Link,
-  CardContent,
-  Card,
-  Avatar,
-  Grid,
-} from '@mui/material';
+import { Typography, Link, CardContent, Grid } from '@mui/material';
 import { IPortfolio } from 'models/data/IPortfolio';
 import { selectLinkIcon } from 'components/create/Contact';
-import { ViewSectionTypography, StyledAvatar } from 'components/create/Styled';
+import {
+  ViewSectionTypography,
+  StyledAvatar,
+  StyledCard,
+} from 'components/create/Styled';
 
 type ContactViewProps = {
   portfolio: IPortfolio;
@@ -22,12 +19,7 @@ const ContactView = (props: ContactViewProps) => {
   return (
     <div>
       <ViewSectionTypography variant="h3">Contact Me</ViewSectionTypography>
-      <Card
-        sx={{
-          borderRadius: 7,
-          marginTop: 3,
-        }}
-      >
+      <StyledCard>
         <CardContent>
           <Stack direction="row" spacing={{ xs: 4, sm: 4, md: 4 }}>
             <Grid>
@@ -80,7 +72,7 @@ const ContactView = (props: ContactViewProps) => {
             </Stack>
           </Stack>
         </CardContent>
-      </Card>
+      </StyledCard>
     </div>
   );
 };

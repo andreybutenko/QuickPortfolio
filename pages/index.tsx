@@ -6,7 +6,6 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { IPortfolio } from 'models/data';
 import type { NextPage } from 'next';
@@ -14,7 +13,7 @@ import IntroductionView from 'components/view/IntroductionView';
 import { useState } from 'react';
 import { useEffectAsync } from 'utils';
 import { PortfolioApiClient } from 'utils/clients';
-import { ViewButton } from 'components/create/Styled';
+import { StyledCard, ViewButton } from 'components/create/Styled';
 import AboutProject from 'components/listing/AboutProject';
 import NavBarView from 'components/view/NavBarView';
 
@@ -48,13 +47,7 @@ const Home: NextPage = () => {
             )}
             <Stack spacing={2}>
               {portfolios?.map((portfolio) => (
-                <Card
-                  sx={{
-                    borderRadius: 7,
-                    marginTop: 3,
-                  }}
-                  key={portfolio.id}
-                >
+                <StyledCard key={portfolio.id}>
                   <CardContent>
                     <IntroductionView portfolio={portfolio} />
                     <CardActions>
@@ -63,7 +56,7 @@ const Home: NextPage = () => {
                       </ViewButton>
                     </CardActions>
                   </CardContent>
-                </Card>
+                </StyledCard>
               ))}
             </Stack>
           </Paper>

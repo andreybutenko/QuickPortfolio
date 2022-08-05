@@ -7,9 +7,10 @@ import {
   StyledTextField,
   StyledButton,
   StyledPaper,
+  CreateTitleTypography,
 } from 'components/create/Styled';
 import LinksEditor from './common/LinksEditor';
-
+import NavBarView from 'components/view/NavBarView';
 const Project = () => {
   const [draftEntry, setDraftEntry] = useState<IProject>({
     title: '',
@@ -34,56 +35,60 @@ const Project = () => {
     });
   };
   return (
-    <StyledPaper elevation={12}>
-      <form>
-        <Stack direction="column" spacing={1}>
-          <StyledTextField
-            label="Title"
-            onChange={(element) => {
-              setDraftEntry({
-                ...draftEntry,
-                title: element.target.value,
-              });
-            }}
-            value={draftEntry.title}
-          />
-          <StyledTextField
-            label="Picture"
-            onChange={(element) => {
-              setDraftEntry({
-                ...draftEntry,
-                picture: element.target.value,
-              });
-            }}
-            value={draftEntry.picture}
-          />
-          <StyledTextField
-            label="Summary"
-            multiline
-            rows={4}
-            onChange={(element) => {
-              setDraftEntry({
-                ...draftEntry,
-                summary: element.target.value,
-              });
-            }}
-            value={draftEntry.summary}
-          />
-          <LinksEditor links={draftEntry.links || []} setLinks={setLinks} />
-          <StyledButton variant="outlined" onClick={onSubmit}>
-            Add Project
-          </StyledButton>
-          <Typography>Your projects</Typography>
-          <Typography>
-            <ul>
-              {projects.map((project, index) => (
-                <li key={index}>{project.title}</li>
-              ))}
-            </ul>
-          </Typography>
-        </Stack>
-      </form>
-    </StyledPaper>
+    <div>
+      <NavBarView pageTitle={[]} />
+      <StyledPaper elevation={12}>
+        <CreateTitleTypography variant="h3">Projects</CreateTitleTypography>
+        <form>
+          <Stack direction="column" spacing={1}>
+            <StyledTextField
+              label="Title"
+              onChange={(element) => {
+                setDraftEntry({
+                  ...draftEntry,
+                  title: element.target.value,
+                });
+              }}
+              value={draftEntry.title}
+            />
+            <StyledTextField
+              label="Picture"
+              onChange={(element) => {
+                setDraftEntry({
+                  ...draftEntry,
+                  picture: element.target.value,
+                });
+              }}
+              value={draftEntry.picture}
+            />
+            <StyledTextField
+              label="Summary"
+              multiline
+              rows={4}
+              onChange={(element) => {
+                setDraftEntry({
+                  ...draftEntry,
+                  summary: element.target.value,
+                });
+              }}
+              value={draftEntry.summary}
+            />
+            <LinksEditor links={draftEntry.links || []} setLinks={setLinks} />
+            <StyledButton variant="outlined" onClick={onSubmit}>
+              Add Project
+            </StyledButton>
+            <Typography>Your projects</Typography>
+            <Typography>
+              <ul>
+                {projects.map((project, index) => (
+                  <li key={index}>{project.title}</li>
+                ))}
+              </ul>
+            </Typography>
+          </Stack>
+        </form>
+      </StyledPaper>
+    </div>
   );
 };
 

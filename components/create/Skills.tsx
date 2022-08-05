@@ -2,17 +2,24 @@ import * as React from 'react';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import CreatePortfolioContext from 'components/create/CreatePorfolioContext';
-import { StyledTextField, StyledPaper } from 'components/create/Styled';
+import {
+  StyledTextField,
+  StyledPaper,
+  CreateTitleTypography,
+} from 'components/create/Styled';
 import { useState, useContext } from 'react';
 import { isUndefined } from 'utils';
+import NavBarView from 'components/view/NavBarView';
 const Skills = () => {
   const { skills, setSkills } = useContext(CreatePortfolioContext);
   const [draftTechSkill, setDraftTechSkill] = useState('');
   const [draftSoftSkill, setDraftSoftSkill] = useState('');
 
   return (
-    <StyledPaper elevation={12}>
-      <div>
+    <div>
+      <NavBarView pageTitle={[]} />
+      <StyledPaper elevation={12}>
+        <CreateTitleTypography variant="h3">Skills</CreateTitleTypography>
         <StyledTextField
           label="Tech Skills"
           value={draftTechSkill}
@@ -61,8 +68,8 @@ const Skills = () => {
             <Chip key={index} label={soft} />
           ))}
         </Stack>
-      </div>
-    </StyledPaper>
+      </StyledPaper>
+    </div>
   );
 };
 

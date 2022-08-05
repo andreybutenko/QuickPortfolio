@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { AppBar, Typography } from '@mui/material';
-import { IPortfolio } from 'models/data/IPortfolio';
+import { Link } from '@mui/material';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
@@ -16,16 +15,7 @@ const NavBarView = (props: NavBarViewProps) => {
     location.hash = '#' + hash;
   }
   return (
-    <AppBar
-      position="static"
-      sx={{
-        borderRadius: 5,
-        marginTop: 3,
-        marginBottom: 5,
-        backgroundColor: 'rgba(73, 97,175, 0.8)',
-        color: 'white',
-      }}
-    >
+    <StyledAppBar position="static">
       <Container maxWidth="xl">
         <Toolbar
           disableGutters
@@ -38,27 +28,17 @@ const NavBarView = (props: NavBarViewProps) => {
           <WorkHistoryIcon
             sx={{ display: { xs: 'none', md: 'flex', color: 'white' }, mr: 1 }}
           />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontWeight: 600,
-              letterSpacing: '.3rem',
-              color: 'white',
-              textDecoration: 'none',
-            }}
-          >
-            QUICKPORTFOLIO
-          </Typography>
-
+          <Link href="/" style={{ textDecoration: 'none' }}>
+            <NavBarViewTypography variant="h6">
+              QUICKPORTFOLIO
+            </NavBarViewTypography>
+          </Link>
           <Box
             sx={{
               flexGrow: 1,
               display: { xs: 'none', md: 'flex' },
+              margin: 'auto',
+              paddingLeft: 10,
             }}
           >
             {props.pageTitle.map((page) => (
@@ -75,7 +55,7 @@ const NavBarView = (props: NavBarViewProps) => {
           </Box>
         </Toolbar>
       </Container>
-    </AppBar>
+    </StyledAppBar>
   );
 };
 export default NavBarView;
